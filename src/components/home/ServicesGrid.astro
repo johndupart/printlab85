@@ -5,28 +5,28 @@ const services = [
     desc: "Técnica artesanal con acabados duraderos para producciones a gran escala.",
     tag: "Calidad",
     class: "md:col-span-2 md:row-span-2 bg-brand-blue/10 border-brand-blue/20",
-    img: "https://images.pexels.com/photos/3952034/pexels-photo-3952034.jpeg"
+    img: "/images/servicio_serigrafia.jpg"
   },
   {
     title: "Bolsas Kraft",
     desc: "Empaques eco-amigables con tu marca.",
     tag: "Eco",
     class: "md:col-span-2 md:row-span-1 glass-card",
-    img: "https://images.pexels.com/photos/6347546/pexels-photo-6347546.jpeg"
+    img: "/images/servicio_bolsa_kraft.jpg"
   },
   {
     title: "Merchandising",
     desc: "Gorras y accesorios únicos.",
     tag: "Promo",
     class: "md:col-span-1 md:row-span-1 glass-card",
-    img: "https://images.pexels.com/photos/4066293/pexels-photo-4066293.jpeg"
+    img: "/images/mercancia.jpg"
   },
   {
     title: "Ropa Premium",
     desc: "Algodón de 180g con estampados de alta resistencia.",
     tag: "Textil",
     class: "md:col-span-1 md:row-span-1 glass-card",
-    img: "https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg"
+    img: "/images/servicio_tienda.jpg"
   }
 ];
 ---
@@ -36,7 +36,7 @@ const services = [
     
     <div class="mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal">
       <div>
-        <h2 class="text-primary font-bold tracking-[0.2em] text-sm uppercase mb-4">Servicios Creativos</h2>
+        <h2 id="servicios" class="text-brand-blue font-bold tracking-[0.2em] text-sm uppercase mb-4">Servicios Creativos</h2>
         <p class="text-4xl md:text-6xl font-black text-white max-w-2xl leading-none uppercase">
           SOLUCIONES GRÁFICAS <br/> 
           <span class="text-slate-500 not-italic font-light">A TU MEDIDA.</span>
@@ -45,12 +45,10 @@ const services = [
 
       <div class="hidden lg:block lg:text-right max-w-1/2">
         <p class="text-slate-400 italic text-sm md:text-base leading-relaxed mb-2">
-          “En el futuro, todo el mundo será famoso durante quince minutos.”
+          “Prints are the most democratic form of art.”
         </p>
-        <p class="text-primary font-bold text-xs tracking-widest uppercase mb-4">— Andy Warhol</p>
-        <p class="text-white font-black text-xl uppercase tracking-tighter leading-none">
-          Nosotros estampamos <br/> esos minutos.
-        </p>
+        <p class="text-brand-blue font-bold text-xs tracking-widest uppercase mb-4">— Andy Warhol</p>
+       
       </div>
     </div>
 
@@ -67,7 +65,7 @@ const services = [
               <span class="px-3 py-1 rounded-full border border-white/10 text-[10px] uppercase font-black tracking-widest bg-white/5 text-white">
                 {s.tag}
               </span>
-              <h3 class="text-2xl font-black mt-4 text-white uppercase leading-tight group-hover:text-primary transition-colors">
+              <h3 class="text-2xl font-black mt-4 text-white uppercase leading-tight group-hover:text-brand-blue transition-colors">
                 {s.title}
               </h3>
             </div>
@@ -78,7 +76,7 @@ const services = [
           </div>
 
           <div class="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-y-0 transition-all duration-500">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-blue"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </div>
         </div>
       ))}

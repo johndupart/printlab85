@@ -1,29 +1,28 @@
 ---
 // ScrollQuote.astro
 const phrases = [
-  "Nos Especializamos en Personalización de Prendas",
+  "Nos Especializamos en",
+  "Personalización de Prendas",
   "Empaques Eco Amigables",
   "Venta de Ropa y Accesorios",
-
 ];
 ---
 
 <section id="warhol-section" class="w-full bg-background-dark py-20 px-4 border-y border-white/5 overflow-hidden">
   <div class="max-w-7xl mx-auto flex flex-col items-center">
 
-    <div class="flex flex-col gap-6 md:gap-3 w-full items-center">
+    <div class="flex flex-col gap-2  w-full items-center">
       {phrases.map((phrase) => (
-        /* Aumentamos a h-[2em] para dar AIRE total a las letras */
         <div class="swap-line-container overflow-hidden h-[1em] pt-4 flex items-center justify-center w-full">
           
           <div class="swap-line flex flex-col items-center justify-center text-center w-full">
             
-            <span class="swap-text text-2xl md:text-4xl lg:text-3xl   text-slate-300 whitespace-nowrap px-6 leading-none block">
+            <span class="swap-text text-2xl md:text-4xl lg:text-4xl   text-slate-300  px-6  block">
               {phrase}
             </span>
 
-            <span class="swap-text text-2xl md:text-4xl lg:text-3xl   text-primary whitespace-nowrap px-6 leading-none block">
-              {phrase}
+<span class="swap-text text-2xl md:text-4xl lg:text-4xl bg-gradient-to-r from-white to-slate-500 bg-clip-text text-transparent px-6 block">       
+         {phrase}
             </span>
 
           </div>

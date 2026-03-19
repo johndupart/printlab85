@@ -3,7 +3,7 @@
 ---
 
 <header class="fixed top-6 left-0 w-full z-[100] flex justify-center ">
-    <nav class="flex items-center border mx-4 max-md:w-full max-md:justify-between border-slate-700/50 px-6 py-4 rounded-full text-white bg-brand-dark/10 backdrop-blur-xl transition-all duration-300 shadow-lg shadow-black/20">
+    <nav class="flex items-center border mx-4 max-md:w-full max-md:justify-between border-slate-700/50 px-6 py-2 rounded-full text-white bg-brand-dark/10 backdrop-blur-xl transition-all duration-300 shadow-lg shadow-black/20">
         
         <a href="/" class="flex items-center">
             <img 
@@ -14,7 +14,7 @@
         </a>
 
         <div class="hidden md:flex items-center gap-7 ml-8">
-            {['Servicios', 'Bolsas Kraft', 'Ropa', 'Taller'].map((item) => (
+            {['Servicios', 'Como Funciona', 'Ropa', 'Taller', 'Contacto'].map((item) => (
                 <a href={`#${item.toLowerCase().replace(' ', '-')}`} class="relative block overflow-hidden group h-[20px]">
                     <div class="transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1/2">
                         <span class="flex items-center justify-center h-[20px] uppercase tracking-wider font-medium text-[12px] whitespace-nowrap">
@@ -30,7 +30,7 @@
 
         <div class="hidden ml-14 md:flex items-center gap-4">
            
-            <button class="bg-white text-black px-5 py-2 rounded-full text-[12px] font-bold uppercase hover:bg-brand-blue hover:text-brand-primary hover:shadow-[0px_0px_25px_rgba(30,112,182,0.6)] transition-all duration-500">
+            <button class="bg-white text-black px-5 py-2 rounded-full text-[12px] font-bold uppercase hover:bg-brand-blue hover:text-white hover:shadow-[0px_0px_25px_rgba(30,112,182,0.6)] transition-all duration-500">
                 Cotizar ahora
             </button>
         </div>
@@ -42,9 +42,11 @@
 
         <div id="mobileMenu" class="absolute invisible opacity-0 translate-y-4 top-24 left-0 right-0 mx-auto w-[92%] bg-brand-dark/95 border border-slate-700/50 rounded-[2rem] p-8 flex flex-col items-center gap-6 text-center backdrop-blur-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] shadow-2xl">
             <a class="text-2xl font-bold hover:text-brand-blue transition-colors" href="#servicios">Servicios</a>
-            <a class="text-2xl font-bold hover:text-brand-blue transition-colors" href="#bolsas-kraft">Bolsas Kraft</a>
+            <a class="text-2xl font-bold hover:text-brand-blue transition-colors" href="#comofunciona">Como Funciona</a>
             <a class="text-2xl font-bold hover:text-brand-blue transition-colors" href="#ropa">Ropa</a>
             <a class="text-2xl font-bold hover:text-brand-blue transition-colors" href="#taller">El Taller</a>
+                     <a class="text-2xl font-bold hover:text-brand-blue transition-colors" href="#ropa">Contacto</a>
+
             
             <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-slate-600 to-transparent my-2"></div>
             

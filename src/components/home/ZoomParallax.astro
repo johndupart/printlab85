@@ -1,0 +1,181 @@
+---
+// ZoomParallax.astro
+const images = [
+    { src: '/images/taller_zipaquira_serigrafia.jpg', class: 'w-[25vw] h-[25vh] z-10', position: 'translate(0, 0)' },
+    { src: '/images/estanpados_camisietas.jpg', class: 'w-[35vw] h-[30vh]', position: 'translate(5vw, -30vh)' },
+    { src: '/images/foto_taller_serigrafia.jpg', class: 'w-[20vw] h-[45vh]', position: 'translate(-25vw, -10vh)' },
+    { src: '/images/serigrafia_zipaquira.jpg', class: 'w-[25vw] h-[25vh]', position: 'translate(27.5vw, 0)' },
+    { src: '/images/taller_serigrafia_estampados.jpg', class: 'w-[20vw] h-[25vh]', position: 'translate(5vw, 27.5vh)' },
+    { src: '/images/taller_serigrafia_zipaquira.jpg', class: 'w-[30vw] h-[25vh]', position: 'translate(-22.5vw, 27.5vh)' },
+    { src: '/images/estampado_bolsas_papel.jpg', class: 'w-[15vw] h-[15vh]', position: 'translate(25vw, 22.5vh)' },
+];
+---
+
+<section id="parallax-container" class="relative h-[300vh] bg-background-dark w-full">
+      <h2 class="pb-10 text-[20vw] font-black text-white/10 uppercase leading-none select-none italic tracking-tighter">
+                Galeria
+            </h2>
+    <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+        
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <h2 class="text-[20vw] font-black text-white/[0.02] uppercase leading-none select-none italic tracking-tighter">
+                Printlab
+            </h2>
+        </div>
+
+        <div class="relative w-full h-full flex items-center justify-center">
+            {images.map((img, i) => (
+                <div 
+                    data-parallax-item={i}
+                    data-base-pos={img.position}
+                    style={`transform: ${img.position}`}
+                    class={`absolute flex items-center justify-center transition-opacity duration-500 cursor-zoom-in group ${img.class}`}
+                >
+                    <div class="relative w-full h-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl group-[.is-touched]:border-primary/50 transition-all duration-500">
+                        <img 
+                            src={img.src} 
+                            alt="Printlab Gallery" 
+                            class="gallery-img w-full h-full object-cover grayscale group-hover:grayscale-0 group-[.is-touched]:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100 group-[.is-touched]:scale-100"
+                            loading="lazy"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 group-[.is-touched]:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none">
+                            <span class="text-primary text-[10px] font-black uppercase tracking-widest">Ver Proyecto</span>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<dialog id="lightbox" class="bg-black/95 w-full h-full max-w-none max-h-none m-0 p-0 border-none backdrop:bg-black/95 backdrop:backdrop-blur-2xl outline-none overflow-hidden text-white">
+    <div class="relative w-full h-full flex items-center justify-center p-4 md:p-12">
+        
+        <button id="closeLightbox" class="absolute top-8 right-8 p-2 hover:bg-white/10 rounded-full transition-all z-[60]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+
+        <button id="prevBtn" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+
+        <button id="nextBtn" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <img id="lightboxImg" src="" alt="" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl transition-transform duration-300">
+        
+        <div id="imgCounter" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-black tracking-[0.4em] uppercase opacity-40">
+            0 / 0
+        </div>
+    </div>
+</dialog>
+
+<script>
+    import { scroll } from "motion";
+
+    const container = document.querySelector("#parallax-container") as HTMLElement;
+    const items = document.querySelectorAll("[data-parallax-item]");
+    const lightbox = document.getElementById('lightbox') as HTMLDialogElement;
+    const lightboxImg = document.getElementById('lightboxImg') as HTMLImageElement;
+    const counter = document.getElementById('imgCounter');
+    
+    // Controles
+    const closeBtn = document.getElementById('closeLightbox');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+    const imagesList = Array.from(document.querySelectorAll('.gallery-img')).map((img: any) => img.src);
+
+    const updateLightbox = (index: number) => {
+        currentIndex = index;
+        if (lightboxImg) {
+            lightboxImg.style.opacity = '0';
+            setTimeout(() => {
+                lightboxImg.src = imagesList[currentIndex];
+                lightboxImg.style.opacity = '1';
+            }, 150);
+        }
+        if (counter) counter.innerText = `${currentIndex + 1} / ${imagesList.length}`;
+    };
+
+    if (container && items.length > 0) {
+        // 1. SCROLL PARALLAX
+        scroll(
+            (progress: number) => {
+                const targetScales = [3, 5, 6, 5, 6, 8, 9];
+                items.forEach((item, i) => {
+                    const el = item as HTMLElement;
+                    const basePos = el.getAttribute('data-base-pos');
+                    const targetScale = targetScales[i] || 4;
+                    const currentScale = 1 + (targetScale - 1) * progress;
+                    el.style.transform = `${basePos} scale(${currentScale})`;
+                    el.style.opacity = progress > 0.85 ? `${1 - (progress - 0.85) * 6}` : "1";
+                });
+            },
+            { target: container, offset: ["start start", "end end"] }
+        );
+
+        // 2. LOGICA NAVEGACIÓN
+        items.forEach((item, i) => {
+            item.addEventListener('click', () => {
+                updateLightbox(i);
+                lightbox?.showModal();
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const showNext = () => updateLightbox((currentIndex + 1) % imagesList.length);
+        const showPrev = () => updateLightbox((currentIndex - 1 + imagesList.length) % imagesList.length);
+
+        nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+        prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+        // Teclado
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox?.open) return;
+            if (e.key === "ArrowRight") showNext();
+            if (e.key === "ArrowLeft") showPrev();
+            if (e.key === "Escape") { lightbox.close(); document.body.style.overflow = ''; }
+        });
+
+        closeBtn?.addEventListener('click', () => { lightbox.close(); document.body.style.overflow = ''; });
+        
+        lightbox?.addEventListener('click', (e) => {
+            if (e.target === lightbox) { lightbox.close(); document.body.style.overflow = ''; }
+        });
+    }
+</script>
+
+<style>
+    [data-parallax-item] {
+        will-change: transform, opacity;
+        transform-origin: center center;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Transición suave entre imágenes del lightbox */
+    #lightboxImg {
+        transition: opacity 0.2s ease-in-out, transform 0.3s ease;
+    }
+
+    dialog[open] {
+        animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+        .w-\[25vw\] { width: 60vw; }
+        .w-\[35vw\] { width: 75vw; }
+        .w-\[20vw\] { width: 50vw; }
+        .h-\[25vh\] { height: 20vh; }
+        /* Ocultar flechas en móvil para usar swipe si prefieres, 
+           o dejarlas pequeñas. Aquí las dejamos sutiles. */
+        #prevBtn, #nextBtn { padding: 0.5rem; background: none; }
+    }
+</style>

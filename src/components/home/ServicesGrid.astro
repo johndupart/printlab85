@@ -31,7 +31,7 @@ const services = [
 ];
 ---
 
-<section class="relative z-20 py-24 px-4 bg-background-dark overflow-hidden border-t border-white/5">
+<section class="relative z-20 py-20 px-4 bg-background-dark overflow-hidden border-t border-white/5">
   <div class="max-w-7xl mx-auto">
     
     <div class="mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal">
@@ -48,16 +48,15 @@ const services = [
           “Prints are the most democratic form of art.”
         </p>
         <p class="text-brand-blue font-bold text-xs tracking-widest uppercase mb-4">— Andy Warhol</p>
-       
       </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[280px]">
       {services.map((s) => (
-        <div class={`service-card group relative rounded-[2.5rem] border p-8 overflow-hidden transition-all duration-700 hover:border-primary/60 glass-shine ${s.class}`}>
+        <div class={`service-card group relative rounded-[2.5rem] border p-8 overflow-hidden transition-all duration-700 hover:border-primary/60 glass-shine cursor-pointer touch-manipulation ${s.class}`}>
           
-          <div class="absolute inset-0 z-0 opacity-10 group-hover:opacity-40 transition-all duration-700 scale-110 group-hover:scale-100">
-            <img src={s.img} alt={s.title} class="h-full w-full object-cover grayscale group-hover:grayscale-0" />
+          <div class="absolute inset-0 z-0 opacity-10 group-hover:opacity-40 group-[.is-touched]:opacity-40 transition-all duration-700 scale-110 group-hover:scale-100 group-[.is-touched]:scale-100">
+            <img src={s.img} alt={s.title} class="h-full w-full object-cover grayscale group-hover:grayscale-0 group-[.is-touched]:grayscale-0" />
           </div>
 
           <div class="relative z-10 h-full flex flex-col justify-between">
@@ -65,17 +64,17 @@ const services = [
               <span class="px-3 py-1 rounded-full border border-white/10 text-[10px] uppercase font-black tracking-widest bg-white/5 text-white">
                 {s.tag}
               </span>
-              <h3 class="text-2xl font-black mt-4 text-white uppercase leading-tight group-hover:text-brand-blue transition-colors">
+              <h3 class="text-2xl font-black mt-4 text-white uppercase leading-tight group-hover:text-brand-blue group-[.is-touched]:text-brand-blue transition-colors">
                 {s.title}
               </h3>
             </div>
             
-            <p class="text-slate-400 text-xs md:text-sm max-w-[200px] group-hover:text-white transition-colors duration-500 font-medium">
+            <p class="text-slate-400 text-xs md:text-sm max-w-[200px] group-hover:text-white group-[.is-touched]:text-white transition-colors duration-500 font-medium">
               {s.desc}
             </p>
           </div>
 
-          <div class="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-y-0 transition-all duration-500">
+          <div class="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 group-[.is-touched]:opacity-100 translate-x-4 group-hover:translate-x-0 group-[.is-touched]:translate-x-0 transition-all duration-500">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-blue"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </div>
         </div>
@@ -87,6 +86,7 @@ const services = [
 <script>
   import { inView, animate, stagger } from "motion";
 
+  // Animación de entrada inicial
   inView(".service-card", (info: any) => {
     animate(
       info.target,
@@ -110,4 +110,31 @@ const services = [
       { duration: 1 } as any
     );
   });
+
+  // LOGICA PARA MOVIL: Simular Hover con Toque
+  const cards = document.querySelectorAll(".service-card");
+
+  cards.forEach((card) => {
+    // Cuando el usuario empieza a tocar la tarjeta
+    card.addEventListener("touchstart", () => {
+      // Quitamos la clase de las otras para que solo brille la actual
+      cards.forEach(c => c.classList.remove("is-touched"));
+      card.classList.add("is-touched");
+    }, { passive: true });
+
+    // Cuando el usuario quita el dedo o hace scroll, se apaga el efecto después de un momento
+    document.addEventListener("touchstart", (e) => {
+      if (!card.contains(e.target as Node)) {
+        card.classList.remove("is-touched");
+      }
+    }, { passive: true });
+  });
 </script>
+
+<style>
+  /* Optimizamos la respuesta táctil */
+  .service-card {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+</style>

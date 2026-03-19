@@ -5,6 +5,7 @@ import Features from '../components/home/Features.astro';
 import HeroScroll from '../components/home/HeroScroll.astro';
 import ProcessTimeline from '../components/home/ProcessTimeline.astro';
 import ServicesGrid from '../components/home/ServicesGrid.astro';
+import ZoomParallax from '../components/home/ZoomParallax.astro';
 import Layout from '../layouts/Layout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -13,9 +14,10 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
 	<HeroScroll />
+	<AboutSection />
 	<ServicesGrid />
 	<BrandMarquee />
-	<AboutSection />
-	<ProcessTimeline>
+	<ProcessTimeline />
+		<ZoomParallax />
 
 </Layout>

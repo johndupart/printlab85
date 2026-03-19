@@ -1,0 +1,136 @@
+---
+const steps = [
+  {
+    num: "01",
+    title: "Diseño & Separación",
+    desc: "Optimizamos tu arte para serigrafía, separando cada color para crear los originales mecánicos de alta precisión.",
+    icon: "draw"
+  },
+  {
+    num: "02",
+    title: "Revelado de Marcos",
+    desc: "Transferimos el diseño a mallas emulsionadas con luz UV, creando la matriz perfecta para el paso de la tinta.",
+    icon: "grid_view"
+  },
+  {
+    num: "03",
+    title: "Estampado Manual",
+    desc: "Aplicamos tintas plastisol o base agua capa por capa, logrando texturas únicas y colores vibrantes.",
+    icon: "format_paint"
+  },
+  {
+    num: "04",
+    title: "Curado Térmico",
+    desc: "Pasamos la prenda por un túnel de calor a 180°C para fusionar la tinta con la fibra, garantizando durabilidad eterna.",
+    icon: "local_fire_department"
+  }
+];
+---
+
+<section id="process-section" class="py-32 bg-background-dark overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="mb-20 text-center lg:text-left flex flex-col lg:flex-row justify-between items-end gap-8">
+      <div class="max-w-2xl">
+        <h2 class="text-primary font-bold tracking-[0.3em] text-xs uppercase mb-4">Ingeniería Textil</h2>
+        <p class="text-5xl md:text-7xl font-black text-white uppercase leading-none tracking-tighter">
+          EL RITUAL DE <br/> <span class="text-slate-500 font-light">LA PERFECCIÓN.</span>
+        </p>
+      </div>
+      <p class="text-slate-400 max-w-sm lg:text-right text-lg">
+        Transparencia total en cada capa. Así es como convertimos algodón en una pieza de colección.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+      <div class="hidden lg:block absolute top-1/2 left-0 w-full h-px bg-white/5 -z-10"></div>
+
+      {steps.map((step) => (
+        <div class="process-card glass-card rounded-[2.5rem] p-10 flex flex-col gap-8 transition-all duration-500 border-white/5 hover:border-primary/30 group relative">
+          
+          <div class="flex justify-between items-start">
+            <span class="text-5xl font-black text-white/5 group-hover:text-primary/20 transition-colors duration-500 leading-none">
+              {step.num}
+            </span>
+            <span class="material-symbols-outlined text-primary text-3xl opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all">
+              {step.icon}
+            </span>
+          </div>
+
+          <div class="mt-auto">
+            <h3 class="text-2xl font-black text-white uppercase mb-4 tracking-tight group-hover:text-primary transition-colors">
+              {step.title}
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed font-medium group-hover:text-slate-200 transition-colors">
+              {step.desc}
+            </p>
+          </div>
+
+          <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-primary rounded-full opacity-0 blur-sm group-[.is-active]:opacity-100 transition-opacity"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { inView, animate } from "motion";
+
+  // Seleccionamos todas las tarjetas
+  const cards = document.querySelectorAll(".process-card");
+
+  cards.forEach((card) => {
+    // Usamos 'element' directamente como primer parámetro
+    inView(card, (element) => {
+      const el = element as HTMLElement;
+      
+      // 1. Animación de Entrada (Foco Activo)
+      animate(
+        el, 
+        { 
+          opacity: 1, 
+          transform: "translateY(0px) scale(1)",
+          filter: "brightness(1) blur(0px)" 
+        }, 
+        { duration: 0.6 } as any
+      );
+      
+      el.classList.add("is-active");
+      el.style.borderColor = "var(--color-primary)";
+      el.style.boxShadow = "0 0 40px rgba(13, 185, 242, 0.15)";
+
+      // 2. Función de salida: se ejecuta cuando el elemento deja el área de foco
+      return () => {
+        el.classList.remove("is-active");
+        el.style.borderColor = "rgba(255,255,255,0.05)";
+        el.style.boxShadow = "none";
+        
+        // Efecto de "apagado" para las que no están en el centro
+        animate(
+          el, 
+          { 
+            opacity: 0.3, 
+            transform: "scale(0.95)",
+            filter: "brightness(0.5) blur(1px)" 
+          },
+          { duration: 0.4 } as any
+        );
+      };
+    }, { margin: "-25% 0% -25% 0%" }); // El foco es el 50% central de la pantalla
+  });
+</script>
+
+<style>
+  .process-card {
+    /* Estado inicial: un poco apagadas */
+    opacity: 0.4;
+    transform: translateY(20px) scale(0.95);
+    filter: brightness(0.5) blur(1px);
+    will-change: transform, opacity, filter;
+  }
+  
+  /* Clase de ayuda para el script */
+  .process-card.is-active {
+    z-index: 10;
+  }
+</style>

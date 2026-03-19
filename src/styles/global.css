@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+
+@theme {
+  /* Colores del diseño Prisma */
+  --color-primary: #0db9f2;
+  --color-background-dark: #101e22;
+  --color-background-light: #f5f8f8;
+  
+  /* Tus colores originales de Printlab (por si los necesitas) */
+  --color-brand-blue: #1e70b6;
+  --color-brand-darkprint: #1d1e1c;
+
+  --font-display: "Manrope", "sans-serif";
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* Fondo oscuro profundo como el que pediste */
+    background-color: var(--color-background-dark);
+    color: #f8fafc; /* Blanco pizarra suave para legibilidad */
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Efecto Vidrio Esmerilado (Glassmorphism) */
+  .glass {
+    background: rgba(16, 30, 34, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Efecto de brillo al pasar el mouse (Shine) */
+  .glass-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-shine::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+  }
+
+  .glass-shine:hover::after {
+    top: -50%;
+    left: 150%;
+  }
+}

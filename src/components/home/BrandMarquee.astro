@@ -1,0 +1,68 @@
+---
+const brands = [
+  "PIZZAQUIRA", "apecolombia", "forca_club", "Studio 85", 
+  "Printlab Crew", "Eco-Pack", "Design Co", "Textil Pro"
+];
+---
+
+<section class="w-full bg-background-dark py-12 md:py-20 border-y border-white/10">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-16">
+    
+   <div class="w-full lg:w-52 shrink-0 relative z-20 flex flex-col items-center text-center">
+  <p class="text-[10px] uppercase tracking-[0.5em] text-primary font-black leading-tight">
+    Marcas que <br class="hidden lg:block"/> confían en <br class="hidden lg:block"/> nosotros
+  </p>
+  <div class="h-px w-10 bg-primary/40 mt-4"></div>
+</div>
+
+    <div class="relative w-full flex-1 overflow-hidden py-4">
+      
+      <div class="absolute inset-y-0 left-0 w-12 md:w-24 bg-gradient-to-r from-background-dark via-background-dark/60 to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute inset-y-0 right-0 w-12 md:w-24 bg-gradient-to-l from-background-dark via-background-dark/60 to-transparent z-10 pointer-events-none"></div>
+
+      <div class="flex overflow-hidden group">
+        <div class="flex animate-marquee-pro whitespace-nowrap gap-12 md:gap-24 items-center">
+          {[...brands, ...brands].map((brand) => (
+            <div class="flex items-center gap-6 md:gap-12 group/item">
+              <span class="text-2xl md:text-5xl font-black text-white/10 uppercase transition-all duration-500 group-hover/item:text-primary group-hover/item:scale-105 cursor-default select-none tracking-tighter italic">
+                {brand}
+              </span>
+              <span class="text-primary/30 font-light text-2xl md:text-3xl">/</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Velocidad equilibrada: 30s es el "sweet spot" para lectura y dinamismo */
+  .animate-marquee-pro {
+    animation: marquee-ultra 112s linear infinite;
+    display: flex;
+    width: max-content;
+  }
+
+  @keyframes marquee-ultra {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .group:hover .animate-marquee-pro {
+    animation-play-state: paused;
+  }
+
+  .animate-marquee-pro {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* En móviles muy pequeños, aceleramos un poco para que no se sienta lento */
+  @media (max-width: 640px) {
+    .animate-marquee-pro {
+      animation-duration: 70s;
+    }
+  }
+</style>

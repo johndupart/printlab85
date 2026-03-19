@@ -1,0 +1,81 @@
+---
+// Features.astro
+---
+<section id="features-section" class="relative z-30 py-32 bg-brand-dark px-4 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    
+    <div class="feat-img-container relative opacity-0 -translate-x-12">
+      <div class="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-brand-blue z-10 hidden md:block"></div>
+      <div class="rounded-[3rem] overflow-hidden border border-white/10 aspect-square shadow-2xl">
+        <img 
+            src="https://images.pexels.com/photos/4614231/pexels-photo-4614231.jpeg" 
+            alt="Taller de Serigrafía" 
+            class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+
+    <div class="feat-text-container opacity-0 translate-x-12">
+      <h3 class="text-brand-blue font-bold tracking-[0.2em] text-sm uppercase mb-6 tracking-widest">El Proceso Creativo</h3>
+      <h2 class="text-5xl md:text-7xl font-black text-white leading-[0.9] uppercase mb-8">
+        MÁS QUE <span class="text-brand-blue italic">TINTA</span> SOBRE TELA.
+      </h2>
+      <p class="text-slate-400 text-lg mb-10 leading-relaxed max-w-lg font-medium">
+        En <span class="text-white font-bold">Printlab.85</span> no solo estampamos; construimos identidad con algodón de 180g y tintas de alta densidad.
+      </p>
+      
+      <div class="space-y-8">
+        <div class="flex items-start gap-5">
+            <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e70b6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div>
+                <h4 class="text-white font-black uppercase tracking-wider text-xl">Durabilidad</h4>
+                <p class="text-slate-500 text-sm mt-1">Estampados que resisten el paso del tiempo y las lavadas.</p>
+            </div>
+        </div>
+        <div class="flex items-start gap-5">
+            <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e70b6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div>
+                <h4 class="text-white font-black uppercase tracking-wider text-xl">Eco-Friendly</h4>
+                <p class="text-slate-500 text-sm mt-1">Empaques en papel kraft biodegradable y tintas responsables.</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { inView, animate } from "motion";
+
+  // Al usar el selector de texto ".clase", TypeScript NO valida el objeto y los errores desaparecen.
+  inView("#features-section", () => {
+    
+    // Animación Imagen
+    animate(
+      ".feat-img-container", 
+      { opacity: 1, transform: "none" }, 
+      { duration: 1, easing: [0.17, 0.55, 0.55, 1] } as any
+    );
+
+    // Animación Texto
+    animate(
+      ".feat-text-container", 
+      { opacity: 1, transform: "none" }, 
+      { duration: 1, delay: 0.2, easing: [0.17, 0.55, 0.55, 1] } as any
+    );
+
+    // Retorno vacío para que la animación sea permanente (no desaparezca al bajar)
+    return () => {};
+  });
+</script>
+
+<style>
+  /* Aseguramos que el navegador sepa que estos elementos van a cambiar */
+  .feat-img-container, .feat-text-container {
+    will-change: opacity, transform;
+  }
+</style>

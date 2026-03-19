@@ -1,0 +1,84 @@
+---
+// Footer.astro
+---
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+    * {
+        font-family: "Geist", sans-serif;
+    }
+</style>
+
+<div class='bg-brand-dark pt-20 px-4'>
+    <footer class="bg-white w-full max-w-[1350px] mx-auto text-black pt-8 lg:pt-12 px-4 sm:px-8 md:px-16 lg:px-28 rounded-tl-3xl rounded-tr-3xl overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-8 md:gap-12">
+            
+            <div class="lg:col-span-3 space-y-6">
+                <a href="/" class="block">
+                    <img src="/logo.svg" alt="Printlab 85" class="h-10 w-auto object-contain" />
+                </a>
+                <p class="text-sm/6 text-neutral-600 max-w-96">
+                    Taller creativo especializado en serigrafía, estampados personalizados y soluciones gráficas. Potenciamos tu identidad de marca en Zipaquirá.
+                </p>
+                <div class="flex gap-5 md:gap-6 order-1 md:order-2">
+                    <a href="https://wa.me/573241443221" class="text-neutral-600 hover:text-brand-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </a>
+                    <a href="#" class="text-neutral-600 hover:text-brand-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" class="text-neutral-600 hover:text-brand-blue transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 lg:gap-28 items-start">
+                <div>
+                    <h3 class="font-bold text-sm mb-4 uppercase tracking-tighter text-brand-blue">Servicios</h3>
+                    <ul class="space-y-3 text-sm text-neutral-800">
+                        <li><a href="#servicios" class="hover:text-brand-blue transition-colors">Serigrafía</a></li>
+                        <li><a href="#servicios" class="hover:text-brand-blue transition-colors">Estampados</a></li>
+                        <li><a href="#servicios" class="hover:text-brand-blue transition-colors">Diseño Gráfico</a></li>
+                        <li><a href="#servicios" class="hover:text-brand-blue transition-colors">Personalización</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-sm mb-4 uppercase tracking-tighter text-brand-blue">Productos</h3>
+                    <ul class="space-y-3 text-sm text-neutral-800">
+                        <li><a href="#bolsas" class="hover:text-brand-blue transition-colors">Bolsas Kraft</a></li>
+                        <li><a href="#ropa" class="hover:text-brand-blue transition-colors">Camisetas</a></li>
+                        <li><a href="#ropa" class="hover:text-brand-blue transition-colors">Buzos / Hoodies</a></li>
+                        <li><a href="#ropa" class="hover:text-brand-blue transition-colors">Gorras</a></li>
+                        <li><a href="#accesorios" class="hover:text-brand-blue transition-colors">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="font-bold text-sm mb-4 uppercase tracking-tighter text-brand-blue">Taller</h3>
+                    <ul class="space-y-3 text-sm text-neutral-800">
+                        <li><a href="#taller" class="hover:text-brand-blue transition-colors">Sobre Nosotros</a></li>
+                        <li><a href="#taller" class="hover:text-brand-blue transition-colors">Ubicación</a></li>
+                        <li class="flex items-center gap-2">
+                            <a href="#contacto" class="hover:text-brand-blue transition-colors">Cotizar</a>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-brand-blue/10 border border-brand-blue text-brand-blue font-bold">HOY</span>
+                        </li>
+                        <li><a href="#" class="hover:text-brand-blue transition-colors">Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-12 pt-4 border-t border-neutral-300 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-neutral-600 text-xs">© 2026 Printlab 85 | Zipaquirá, Colombia</p>
+            <p class='text-xs text-neutral-600 font-medium italic'>Hecho con precisión, impreso con pasión.</p>
+        </div>
+        
+        <div class="relative">
+            <div class="absolute inset-x-0 bottom-0 mx-auto w-full max-w-3xl h-full max-h-64 bg-brand-blue/10 rounded-full blur-[100px] pointer-events-none"></div>
+            <h1 class="text-center font-extrabold leading-[0.7] text-transparent text-[clamp(2.5rem,12vw,12rem)] [-webkit-text-stroke:1px_#e5e5e5] mt-6 select-none uppercase" >
+                Printlab.85
+            </h1>
+        </div>
+    </footer>
+</div>

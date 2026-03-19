@@ -1,0 +1,115 @@
+---
+const services = [
+  {
+    title: "Serigrafía Profesional",
+    desc: "Técnica artesanal con acabados duraderos para producciones a gran escala.",
+    tag: "Calidad",
+    class: "md:col-span-2 md:row-span-2 bg-brand-blue/10 border-brand-blue/20",
+    img: "https://images.pexels.com/photos/3952034/pexels-photo-3952034.jpeg"
+  },
+  {
+    title: "Bolsas Kraft",
+    desc: "Empaques eco-amigables con tu marca.",
+    tag: "Eco",
+    class: "md:col-span-2 md:row-span-1 glass-card",
+    img: "https://images.pexels.com/photos/6347546/pexels-photo-6347546.jpeg"
+  },
+  {
+    title: "Merchandising",
+    desc: "Gorras y accesorios únicos.",
+    tag: "Promo",
+    class: "md:col-span-1 md:row-span-1 glass-card",
+    img: "https://images.pexels.com/photos/4066293/pexels-photo-4066293.jpeg"
+  },
+  {
+    title: "Ropa Premium",
+    desc: "Algodón de 180g con estampados de alta resistencia.",
+    tag: "Textil",
+    class: "md:col-span-1 md:row-span-1 glass-card",
+    img: "https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg"
+  }
+];
+---
+
+<section class="relative z-20 py-24 px-4 bg-background-dark overflow-hidden border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    
+    <div class="mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal">
+      <div>
+        <h2 class="text-primary font-bold tracking-[0.2em] text-sm uppercase mb-4">Servicios Creativos</h2>
+        <p class="text-4xl md:text-6xl font-black text-white max-w-2xl leading-none uppercase">
+          SOLUCIONES GRÁFICAS <br/> 
+          <span class="text-slate-500 not-italic font-light">A TU MEDIDA.</span>
+        </p>
+      </div>
+
+      <div class="hidden lg:block lg:text-right max-w-1/2">
+        <p class="text-slate-400 italic text-sm md:text-base leading-relaxed mb-2">
+          “En el futuro, todo el mundo será famoso durante quince minutos.”
+        </p>
+        <p class="text-primary font-bold text-xs tracking-widest uppercase mb-4">— Andy Warhol</p>
+        <p class="text-white font-black text-xl uppercase tracking-tighter leading-none">
+          Nosotros estampamos <br/> esos minutos.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[280px]">
+      {services.map((s) => (
+        <div class={`service-card group relative rounded-[2.5rem] border p-8 overflow-hidden transition-all duration-700 hover:border-primary/60 glass-shine ${s.class}`}>
+          
+          <div class="absolute inset-0 z-0 opacity-10 group-hover:opacity-40 transition-all duration-700 scale-110 group-hover:scale-100">
+            <img src={s.img} alt={s.title} class="h-full w-full object-cover grayscale group-hover:grayscale-0" />
+          </div>
+
+          <div class="relative z-10 h-full flex flex-col justify-between">
+            <div>
+              <span class="px-3 py-1 rounded-full border border-white/10 text-[10px] uppercase font-black tracking-widest bg-white/5 text-white">
+                {s.tag}
+              </span>
+              <h3 class="text-2xl font-black mt-4 text-white uppercase leading-tight group-hover:text-primary transition-colors">
+                {s.title}
+              </h3>
+            </div>
+            
+            <p class="text-slate-400 text-xs md:text-sm max-w-[200px] group-hover:text-white transition-colors duration-500 font-medium">
+              {s.desc}
+            </p>
+          </div>
+
+          <div class="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-y-0 transition-all duration-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { inView, animate, stagger } from "motion";
+
+  inView(".service-card", (info: any) => {
+    animate(
+      info.target,
+      { 
+        opacity: [0, 1], 
+        transform: ["translateY(30px)", "translateY(0px)"] 
+      },
+      { 
+        duration: 0.8, 
+        delay: stagger(0.1),
+        easing: [0.17, 0.55, 0.55, 1] 
+      } as any
+    );
+  });
+
+  // Animación suave para el header
+  inView(".reveal", (info: any) => {
+    animate(
+      info.target,
+      { opacity: [0, 1], transform: ["translateY(20px)", "translateY(0px)"] },
+      { duration: 1 } as any
+    );
+  });
+</script>

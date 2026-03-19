@@ -1,0 +1,94 @@
+---
+// ScrollQuote.astro
+const phrases = [
+  "Nos Especializamos en Personalización de Prendas",
+  "Empaques Eco Amigables",
+  "Venta de Ropa y Accesorios",
+
+];
+---
+
+<section id="warhol-section" class="w-full bg-background-dark py-20 px-4 border-y border-white/5 overflow-hidden">
+  <div class="max-w-7xl mx-auto flex flex-col items-center">
+
+    <div class="flex flex-col gap-6 md:gap-3 w-full items-center">
+      {phrases.map((phrase) => (
+        /* Aumentamos a h-[2em] para dar AIRE total a las letras */
+        <div class="swap-line-container overflow-hidden h-[1em] pt-4 flex items-center justify-center w-full">
+          
+          <div class="swap-line flex flex-col items-center justify-center text-center w-full">
+            
+            <span class="swap-text text-2xl md:text-4xl lg:text-3xl   text-slate-300 whitespace-nowrap px-6 leading-none block">
+              {phrase}
+            </span>
+
+            <span class="swap-text text-2xl md:text-4xl lg:text-3xl   text-primary whitespace-nowrap px-6 leading-none block">
+              {phrase}
+            </span>
+
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { scroll } from "motion";
+
+  const section = document.querySelector("#warhol-section") as HTMLElement;
+  const lines = document.querySelectorAll(".swap-line");
+
+  if (section && lines.length > 0) {
+    scroll(
+      (progress: number) => {
+        lines.forEach((line, i) => {
+          const el = line as HTMLElement;
+          
+          const start = i * 0.1; 
+          const end = Math.min(start + 0.7, 1);
+          const lineProgress = Math.min(Math.max((progress - start) / (end - start), 0), 1);
+
+          // Medimos la altura real del primer span para un swap perfecto
+          const firstSpan = el.querySelector('span');
+          if (firstSpan) {
+            const height = firstSpan.getBoundingClientRect().height;
+            // Añadimos un pequeño margen al desplazamiento para centrar el swap
+            el.style.transform = `translateY(${-lineProgress * (height + 40)}px)`;
+          }
+          el.style.opacity = `${0.3 + (lineProgress * 0.7)}`;
+        });
+      },
+      {
+        target: section,
+        offset: ["start end", "end start"]
+      }
+    );
+  }
+</script>
+
+<style>
+  /* El secreto: Altura de 2em para que las letras respiren */
+  .swap-line-container {
+    height: 2em; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .swap-line {
+    will-change: transform, opacity;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Espacio entre el texto blanco y el azul dentro del contenedor móvil */
+  }
+
+  .swap-text {
+    /* Quitamos cualquier restricción de altura interna */
+    line-height: 1;
+    display: block;
+    padding: 10px 0;
+  }
+</style>

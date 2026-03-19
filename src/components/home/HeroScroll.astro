@@ -1,0 +1,163 @@
+---
+const sections = [
+  {
+    left: "Identidad",
+    title: "SERIGRAFÍA",
+    right: "Artesanal",
+    bg: "https://images.pexels.com/photos/3952034/pexels-photo-3952034.jpeg",
+  },
+  {
+    left: "Calidad",
+    title: "BOLSAS KRAFT",
+    right: "Ecológico",
+    bg: "https://images.pexels.com/photos/6347546/pexels-photo-6347546.jpeg",
+  },
+  {
+    left: "Estilo",
+    title: "ROPA BÁSICA",
+    right: "Premium",
+    bg: "https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg",
+  },
+];
+---
+
+<section id="hero-container" class="relative bg-brand-dark">
+  <div class="sticky top-0 h-screen w-full overflow-hidden">
+    
+    <div class="absolute inset-0 z-0">
+      {sections.map((s, i) => (
+        <div 
+          data-bg-index={i} 
+          class="absolute inset-0 opacity-0 transition-opacity duration-700 ease-in-out"
+        >
+          <img src={s.bg} alt="" class="h-full w-full object-cover brightness-[0.4]" />
+        </div>
+      ))}
+    </div>
+
+    <div class="relative z-10 h-full w-full grid grid-cols-12 grid-rows-6 px-8 py-12 text-white">
+      
+      <div class="col-span-12 row-start-1 self-start text-center">
+        <h2 class="text-xs font-bold tracking-[0.3em] opacity-50 uppercase">Printlab Studio / Process</h2>
+      </div>
+
+      <div class="col-span-12 row-start-3 row-end-5 flex items-center justify-between pointer-events-none">
+        <div class="w-1/4 hidden md:block">
+            <div id="left-labels" class="flex flex-col gap-4">
+                {sections.map((s, i) => (
+                    <span data-label-index={i} class="text-sm font-bold uppercase tracking-widest opacity-20 transition-all duration-500">
+                        {s.left}
+                    </span>
+                ))}
+            </div>
+        </div>
+
+        <div class="flex-1 text-center relative h-32 flex items-center justify-center">
+            {sections.map((s, i) => (
+                <h1 
+                    data-title-index={i} 
+                    class="absolute text-[clamp(2.5rem,10vw,8rem)] font-black leading-none opacity-0 translate-y-8 transition-all duration-700 ease-out text-white"
+                >
+                    {s.title}
+                </h1>
+            ))}
+        </div>
+
+        <div class="w-1/4 hidden md:block text-right">
+            <div id="right-labels" class="flex flex-col gap-4">
+                {sections.map((s, i) => (
+                    <span data-label-index={i} class="text-sm font-bold uppercase tracking-widest opacity-20 transition-all duration-500">
+                        {s.right}
+                    </span>
+                ))}
+            </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 row-start-6 self-end flex flex-col items-center">
+        <span class="text-xs font-bold tracking-widest mb-4 opacity-70">ZIPAQUIRÁ, COLOMBIA</span>
+        <div class="w-48 h-[2px] bg-white/20 relative">
+            <div id="progress-bar" class="absolute top-0 left-0 h-full bg-brand-blue w-0 transition-all duration-300"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="h-[300vh] w-full pointer-events-none"></div>
+</section>
+
+<script>
+  import { scroll } from "motion";
+
+  // Seleccionamos los elementos con el tipo correcto para evitar el error de .style
+  const container = document.querySelector("#hero-container") as HTMLElement;
+  const bgs = document.querySelectorAll("[data-bg-index]");
+  const titles = document.querySelectorAll("[data-title-index]");
+  const labels = document.querySelectorAll("[data-label-index]");
+  const progressBar = document.querySelector("#progress-bar") as HTMLElement;
+  
+  const totalSections = bgs.length;
+
+  if (container) {
+    // En Motion One actual, el primer argumento de scroll es el progreso (0 a 1)
+    scroll((progress: number) => {
+      // El índice activo se calcula directamente sobre el progreso total
+      const activeIndex = Math.min(
+          totalSections - 1, 
+          Math.floor(progress * totalSections)
+      );
+
+      // Error ts(2339) corregido: progressBar ya es HTMLElement
+      if (progressBar) {
+          progressBar.style.width = `${progress * 100}%`;
+      }
+
+      // Actualizar Visibilidad de fondos
+      bgs.forEach((bg, i) => {
+          const element = bg as HTMLElement;
+          if (i === activeIndex) {
+              element.classList.add('opacity-100');
+              element.classList.remove('opacity-0');
+          } else {
+              element.classList.add('opacity-0');
+              element.classList.remove('opacity-100');
+          }
+      });
+
+      // Actualizar Títulos
+      titles.forEach((title, i) => {
+          const element = title as HTMLElement;
+          if (i === activeIndex) {
+              element.classList.add('opacity-100', 'translate-y-0');
+              element.classList.remove('opacity-0', 'translate-y-8');
+          } else {
+              element.classList.add('opacity-0', 'translate-y-8');
+              element.classList.remove('opacity-100', 'translate-y-0');
+          }
+      });
+
+      // Actualizar Etiquetas laterales
+      labels.forEach((label, i) => {
+          const element = label as HTMLElement;
+          if (i === activeIndex) {
+              element.classList.add('opacity-100', 'scale-110', 'text-brand-blue');
+              element.classList.remove('opacity-20');
+          } else {
+              element.classList.add('opacity-20');
+              element.classList.remove('opacity-100', 'scale-110', 'text-brand-blue');
+          }
+      });
+    }, {
+      target: container,
+      offset: ["start start", "end end"]
+    });
+  }
+</script>
+
+<style>
+    /* Optimizamos para que las transiciones de Tailwind sean suaves */
+    [data-title-index], [data-bg-index], [data-label-index] {
+        will-change: transform, opacity;
+    }
+</style>

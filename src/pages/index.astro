@@ -13,21 +13,59 @@ import Testimonial from '../components/home/Testimonial.astro';
 import ZoomParallax from '../components/home/ZoomParallax.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Optimización SEO, GEO y AEO específica para la portada (Home)
+// Estos datos sobreescriben los props por defecto del Layout
+const pageTitle = "Printlab.85 | Taller de Serigrafía y Estampados en Zipaquirá";
+const pageDescription = "En Printlab.85 transformamos tus ideas en ropa premium y empaques ecológicos. Taller creativo en Zipaquirá especializado en serigrafía, DTF, vinilo textil y bolsas kraft.";
+
+// Datos Enriquecidos Específicos de la Página (WebSite y WebPage)
+// Esto crea una "telaraña semántica" uniendo esta página con tu negocio local
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://printlab85.com/#website",
+      "url": "https://printlab85.com",
+      "name": "Printlab.85",
+      "description": pageDescription,
+      "publisher": {
+        "@id": "https://printlab85.com/#business" // Conecta con el schema del Layout
+      },
+      "inLanguage": "es-CO"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://printlab85.com/#webpage",
+      "url": "https://printlab85.com",
+      "name": pageTitle,
+      "isPartOf": {
+        "@id": "https://printlab85.com/#website"
+      },
+      "about": {
+        "@id": "https://printlab85.com/#business"
+      },
+      "description": pageDescription,
+      "inLanguage": "es-CO"
+    }
+  ]
+};
 ---
 
-<Layout>
-	<HeroScroll />
-		<BrandMarquee />
+<Layout title={pageTitle} description={pageDescription}>
+    
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(homeSchema)} />
 
-	<AboutSection />
-	<ServicesGrid />
-	<ServiceTable />
-	<ProcessTimeline />
-	<ZoomParallax />
-	<Testimonial />
-	<FaqAccordion />
-	<Contact />
-	<CtaMarquee />
+    <HeroScroll />
+    <BrandMarquee />
+    <AboutSection />
+    <ServicesGrid />
+    <ServiceTable />
+    <ProcessTimeline />
+    <ZoomParallax />
+    <Testimonial />
+    <FaqAccordion />
+    <Contact />
+    <CtaMarquee />
+    
 </Layout>

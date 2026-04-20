@@ -1,0 +1,149 @@
+---
+/* src/components/StickyCTA.astro */
+const whatsappNumber = "+573241443221";
+const whatsappMessage = "¡Hola Printlab! Vi su página web y me gustaría recibir asesoría para cotizar un proyecto.";
+const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<div 
+  id="sticky-notification" 
+  class="fixed z-[99] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none
+         /* Móvil: Pegado abajo, ancho completo, oculto hacia abajo */
+         bottom-5 left-0 w-full translate-y-full opacity-0
+         /* Desktop (sm en adelante): Flotante, centrado, oculto hacia abajo */
+         sm:bottom-8 sm:left-1/2 sm:-translate-x-1/2 sm:w-[90%] sm:max-w-2xl sm:translate-y-24 sm:opacity-0"
+  role="complementary"
+  aria-label="Cotización rápida por WhatsApp"
+>
+  <div class="bg-[#0a0a0a]/80 backdrop-blur-2xl border-t border-white/10 flex items-center justify-between gap-4 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]
+              /* Móvil: Bordes curvos sutiles arriba, padding ajustado */
+              p-4 rounded-t-[2rem]
+              /* Desktop: Bordes redondeados tipo píldora, padding generoso, sombra flotante suave */
+              sm:p-4 sm:pl-6 sm:rounded-full sm:border sm:border-white/10 sm:shadow-[0_20px_60px_rgba(0,0,0,0.6)] relative overflow-hidden group">
+    
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+    <div class="flex items-center gap-4 relative z-10">
+      <div class="relative flex-shrink-0">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border border-white/20 bg-white/5 flex items-center justify-center p-2">
+          <img src="/logo.svg" alt="Printlab 85" class="w-full h-full object-contain" />
+        </div>
+        <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25d366] border-2 border-[#0a0a0a] rounded-full animate-pulse"></span>
+      </div>
+      
+      <div>
+        <p class="text-white/50 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] mb-1">Cotización Inmediata</p>
+        <p class="text-white text-lg sm:text-2xl font-black uppercase tracking-tighter leading-none">
+          ¿Tienes una <span class="text-primary">idea?</span>
+        </p>
+      </div>
+    </div>
+
+    <a 
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bg-primary text-[#0a0a0a] rounded-full font-black uppercase tracking-widest hover:bg-white active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(13,185,242,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center gap-2 flex-shrink-0 relative z-10
+             /* Móvil: Texto más pequeño, padding ajustado */
+             px-5 py-3.5 text-[10px]
+             /* Desktop: Texto normal, padding normal */
+             sm:px-8 sm:py-4 sm:text-xs"
+    >
+      Hablemos
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.164 1.236 8.41 3.483 2.247 2.247 3.483 5.234 3.483 8.41 0 6.556-5.332 11.89-11.888 11.89-2.015 0-3.991-.511-5.741-1.486l-6.251 1.64zm6.79-3.363l.356.211c1.477.878 3.185 1.342 4.933 1.342 5.378 0 9.756-4.378 9.756-9.756 0-2.604-1.013-5.052-2.853-6.892-1.841-1.841-4.288-2.854-6.891-2.854-5.378 0-9.756 4.378-9.756 9.756 0 1.831.511 3.616 1.479 5.15l.233.372-1.003 3.666 3.76-.988z"/></svg>
+    </a>
+
+    <button 
+      id="close-sticky" 
+      class="absolute text-white/40 hover:text-white transition-colors duration-300 z-20 p-2
+             /* Móvil: Esquina superior derecha interior */
+             top-2 right-2
+             /* Desktop: Centrado verticalmente al extremo derecho */
+             sm:top-1/2 sm:-translate-y-1/2 sm:right-4 sm:p-2"
+      aria-label="Cerrar notificación"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  function initConversionCTA() {
+    const sticky = document.getElementById('sticky-notification');
+    const closeBtn = document.getElementById('close-sticky');
+    
+    let isClosedManually = false;
+
+    if (!sticky || !closeBtn) return;
+
+    const handleScroll = () => {
+      if (isClosedManually) return;
+
+      const documentHeight = document.documentElement.scrollHeight;
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Calcular porcentaje de scroll
+      const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+
+      // Detectar breakpoint sm (640px)
+      const isDesktop = window.innerWidth >= 640; 
+
+      // Mostrar después del 40% de scroll (para que lo vean antes de llegar al final)
+      if (scrollPercentage >= 40) {
+        // Mostrar
+        sticky.classList.remove('pointer-events-none');
+        if (isDesktop) {
+          sticky.classList.remove('sm:translate-y-24', 'sm:opacity-0');
+          sticky.classList.add('sm:translate-y-0', 'sm:opacity-100');
+        } else {
+          sticky.classList.remove('translate-y-full', 'opacity-0');
+          sticky.classList.add('translate-y-0', 'opacity-100');
+        }
+      } else {
+        // Ocultar
+        sticky.classList.add('pointer-events-none');
+        if (isDesktop) {
+          sticky.classList.add('sm:translate-y-24', 'sm:opacity-0');
+          sticky.classList.remove('sm:translate-y-0', 'sm:opacity-100');
+        } else {
+          sticky.classList.add('translate-y-full', 'opacity-0');
+          sticky.classList.remove('translate-y-0', 'opacity-100');
+        }
+      }
+    };
+
+    closeBtn.addEventListener('click', () => {
+      isClosedManually = true;
+      sticky.classList.add('opacity-0', 'pointer-events-none');
+      
+      const isDesktop = window.innerWidth >= 640;
+      if (isDesktop) {
+        sticky.classList.add('sm:translate-y-24');
+      } else {
+        sticky.classList.add('translate-y-full');
+      }
+      
+      window.removeEventListener('scroll', handleScroll);
+    });
+
+    // Throttling básico para mejorar el rendimiento del evento scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    
+    // Ejecutar una vez al cargar por si el usuario ya está a mitad de página
+    handleScroll();
+  }
+
+  // Inicialización estándar y soporte para Astro View Transitions
+  initConversionCTA();
+  document.addEventListener('astro:after-swap', initConversionCTA);
+</script>

@@ -1,0 +1,339 @@
+---
+// src/components/Testimonial.astro
+const testimonials = [
+  {
+    quote: "Prendas de muy buena calidad y estilo,el lugar es agradable y cómodo para encontrar lo que más se ajusta a tu estilo,buena variedad de artículos y prendas.Tambien me gustaron los precios ya que son bastante accesibles.",
+    author: "Raul Martinez",
+    role: "Usuario",
+    company: "Ropa y Accesorios",
+  },
+  {
+    quote: "Excelente lugar para ropa y estampados. Fui por un estampado y quedé muy satisfecha con el resultado",
+    author: "Valentina",
+    role: "Fundadora",
+    company: "Boutique 85",
+  },
+  {
+    quote: "Las bolsas kraft personalizadas le dieron ese toque premium y ecológico que nuestros envíos necesitaban.",
+    author: "Camilo Cendales",
+    role: "CEO PizzaQuira",
+    company: "PizzaQuira",
+  },
+];
+
+// Estado inicial para el renderizado del servidor (SEO y primera carga rápida)
+const initial = testimonials[0];
+---
+
+<div id="testimonial-section" class="flex items-center justify-center min-h-[80vh] bg-background-dark overflow-hidden py-24 relative z-20 border-t border-white/5">
+  <div class="relative w-full max-w-5xl px-4 md:px-0">
+    
+    <div
+      id="bg-number"
+      class="absolute left-12 md:-left-8 top-1/2 -translate-y-1/2 -translate-x-1/2 text-[15rem] md:text-[28rem] font-bold text-white/[0.03] select-none pointer-events-none leading-none tracking-tighter will-change-transform"
+      style="filter: blur(0px);"
+    >
+      01
+    </div>
+
+    <div class="relative flex flex-col md:flex-row">
+      
+      <div class="hidden md:flex flex-col items-center justify-center pr-16 border-r border-white/10">
+        <span
+          id="vertical-title"
+          class="text-xs font-mono text-slate-500 tracking-widest uppercase opacity-0"
+          style="writing-mode: vertical-rl; text-orientation: mixed;"
+        >
+          Testimonios
+        </span>
+        
+        <div class="relative h-32 w-px bg-white/10 mt-8">
+          <div
+            id="progress-bar"
+            class="absolute top-0 left-0 w-full bg-primary origin-top"
+            style="height: 33.33%;"
+          ></div>
+        </div>
+      </div>
+
+      <div class="flex-1 md:pl-16 py-12">
+        
+        <div id="company-badge-container" class="mb-8">
+          <span class="inline-flex items-center gap-2 text-xs font-mono text-slate-400 border border-white/10 rounded-full px-4 py-1.5 bg-white/5 backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            <span id="company-name">{initial.company}</span>
+          </span>
+        </div>
+
+        <div class="relative mb-12 min-h-[180px] md:min-h-[140px]">
+          <blockquote id="quote-container" class="text-3xl md:text-5xl font-light text-white leading-[1.2] tracking-tight">
+            </blockquote>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-0">
+          <div id="author-info" class="flex items-center gap-4">
+            <div id="author-line" class="w-8 h-px bg-primary origin-left scale-x-100"></div>
+            <div>
+              <p id="author-name" class="text-base font-bold text-white uppercase tracking-wider">{initial.author}</p>
+              <p id="author-role" class="text-sm text-slate-400">{initial.role}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 flex-wrap">
+            
+            <a 
+              href="https://www.google.com/search?sca_esv=7127d2bfff853169&rlz=1C5CHFA_enCO1121CO1121&sxsrf=ANbL-n6UYWCCMVtmfs-y-DC_Q6ZUb5L6cA:1776707302286&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOaGO1fY90F4JVAG2vtczft8mgNFjsqX-BN4RHo0UXQGGuUoII2swIvIDqSP7oekfisWOHK8Ss_yr2w0GRsRNW9erKKAY&q=Printlab85+Opiniones&sa=X&ved=2ahUKEwi_nf28_vyTAxWWQTABHaAIPacQ0bkNegQIJBAH&biw=1390&bih=771&dpr=2" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="group relative h-12 px-6 rounded-full border border-white/10 flex items-center justify-center overflow-hidden bg-white/5 hover:border-primary/50 transition-all active:scale-95"
+            >
+              <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <span class="relative z-10 flex items-center gap-2 text-white font-bold uppercase tracking-widest text-[10px] md:text-xs">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                Ver en Google
+              </span>
+            </a>
+
+            <button
+              id="btn-prev"
+              class="group relative w-12 h-12 rounded-full border border-white/10 flex items-center justify-center overflow-hidden bg-white/5 hover:border-primary/50 transition-all active:scale-95"
+            >
+              <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" class="relative z-10 text-white">
+                <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button
+              id="btn-next"
+              class="group relative w-12 h-12 rounded-full border border-white/10 flex items-center justify-center overflow-hidden bg-white/5 hover:border-primary/50 transition-all active:scale-95"
+            >
+              <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" class="relative z-10 text-white">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="absolute -bottom-10 md:-bottom-20 left-0 right-0 overflow-hidden opacity-[0.03] pointer-events-none">
+      <div id="ticker-track" class="flex whitespace-nowrap text-4xl md:text-6xl font-black tracking-widest uppercase">
+        <span class="mx-8">Usuarios • PizzaQuira • Conecta Ambiente • Topping • Boutique 85 • Vita • Urban Style • Boutique 85 • Usuarios • Zipaquira digital • Boutique 85 • Conecta ambiente •</span>
+        <span class="mx-8">Usuarios • PizzaQuira • Conecta Ambiente • Topping • Boutique 85 • Vita • Urban Style • Boutique 85 • Usuarios • Zipaquira digital • Boutique 85 • Conecta ambiente •</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  import { animate, stagger, inView } from "motion";
+
+  const testimonials = [
+  {
+    quote: "Prendas de buena calidad y estilo, Lugar es agradable y cómodo se ajusta a tu estilo.",
+    author: "Raul Martinez",
+    role: "Usuario",
+    company: "Ropa y Accesorios",
+  },
+  {
+    quote: "Excelente lugar para ropa y estampados. Fui por un estampado y quedé muy satisfecha con el resultado",
+    author: "Valentina",
+    role: "Fundadora",
+    company: "Boutique 85",
+  },
+  {
+    quote: "Las bolsas kraft personalizadas le dieron ese toque premium y ecológico que nuestros envíos necesitaban.",
+    author: "Camilo Cendales",
+    role: "CEO PizzaQuira",
+    company: "PizzaQuira",
+  },
+];
+
+  let activeIndex = 0;
+  let isAnimating = false;
+
+  // Referencias del DOM forzadas como 'any' para evitar errores de sobrecarga de TypeScript
+  const section = document.getElementById("testimonial-section") as any;
+  const bgNumber = document.getElementById("bg-number") as any;
+  const progressBar = document.getElementById("progress-bar") as any;
+  const companyName = document.getElementById("company-name") as any;
+  const companyBadgeContainer = document.getElementById("company-badge-container") as any;
+  const quoteContainer = document.getElementById("quote-container") as any;
+  const authorInfo = document.getElementById("author-info") as any;
+  const authorName = document.getElementById("author-name") as any;
+  const authorRole = document.getElementById("author-role") as any;
+  const authorLine = document.getElementById("author-line") as any;
+  const btnPrev = document.getElementById("btn-prev") as any;
+  const btnNext = document.getElementById("btn-next") as any;
+  const verticalTitle = document.getElementById("vertical-title") as any;
+  const tickerTrack = document.getElementById("ticker-track") as any;
+
+  function renderQuote(text: string) {
+    if (!quoteContainer) return;
+    const words = text.split(" ");
+    quoteContainer.innerHTML = words
+      .map((word: string) => `<span class="inline-block mr-[0.3em] opacity-0" style="transform: translateY(20px) rotateX(90deg);">${word}</span>`)
+      .join("");
+  }
+
+  renderQuote(testimonials[0].quote);
+
+  // Animación inicial al hacer scroll
+  if (verticalTitle) {
+      inView(verticalTitle, () => {
+          animate(verticalTitle, { opacity: 1 } as any, { duration: 1, delay: 0.3 } as any);
+          
+          if(quoteContainer) {
+            const spans = Array.from(quoteContainer.querySelectorAll("span")) as any[];
+            if (spans.length > 0) {
+                animate(
+                    spans, 
+                    { opacity: 1, y: [20, 0], rotateX: [90, 0] } as any, 
+                    { duration: 0.5, delay: stagger(0.05), easing: [0.22, 1, 0.36, 1] } as any
+                );
+            }
+          }
+      });
+  }
+
+  // Función principal de transición
+  async function changeTestimonial(newIndex: number, direction: number) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const spans = quoteContainer ? (Array.from(quoteContainer.querySelectorAll("span")) as any[]) : [];
+    
+    // 1. ANIMAR SALIDA (Exit)
+    const exitAnimations = [];
+    
+    if (spans.length > 0) {
+        exitAnimations.push(animate(spans, { opacity: 0, y: -10 } as any, { duration: 0.2, delay: stagger(0.02) } as any).finished);
+    }
+    if (companyBadgeContainer) {
+        exitAnimations.push(animate(companyBadgeContainer, { opacity: 0, x: direction * 20 } as any, { duration: 0.4 } as any).finished);
+    }
+    if (authorInfo) {
+        exitAnimations.push(animate(authorInfo, { opacity: 0, y: -20 } as any, { duration: 0.4 } as any).finished);
+    }
+    if (bgNumber) {
+        exitAnimations.push(animate(bgNumber, { opacity: 0, filter: "blur(10px)", scale: 1.1 } as any, { duration: 0.4 } as any).finished);
+    }
+
+    await Promise.all(exitAnimations);
+
+    // 2. ACTUALIZAR DOM (Data)
+    activeIndex = newIndex;
+    const current = testimonials[activeIndex];
+
+    if (bgNumber) bgNumber.textContent = String(activeIndex + 1).padStart(2, "0");
+    if (companyName) companyName.textContent = current.company;
+    if (authorName) authorName.textContent = current.author;
+    if (authorRole) authorRole.textContent = current.role;
+    renderQuote(current.quote);
+    if (progressBar) progressBar.style.height = `${((activeIndex + 1) / testimonials.length) * 100}%`;
+
+    // 3. ANIMAR ENTRADA (Enter)
+    const newSpans = quoteContainer ? (Array.from(quoteContainer.querySelectorAll("span")) as any[]) : [];
+    const enterAnimations = [];
+
+    if (bgNumber) {
+        bgNumber.style.transform = "scale(0.8)";
+        enterAnimations.push(animate(bgNumber, { opacity: 1, filter: "blur(0px)", scale: 1 } as any, { duration: 0.6, easing: [0.22, 1, 0.36, 1] } as any).finished);
+    }
+    if (companyBadgeContainer) {
+        companyBadgeContainer.style.transform = `translateX(${-direction * 20}px)`;
+        enterAnimations.push(animate(companyBadgeContainer, { opacity: 1, x: 0 } as any, { duration: 0.4 } as any).finished);
+    }
+    if (authorInfo) {
+        authorInfo.style.transform = "translateY(20px)";
+        enterAnimations.push(animate(authorInfo, { opacity: 1, y: 0 } as any, { duration: 0.4, delay: 0.2 } as any).finished);
+    }
+    if (authorLine) {
+        enterAnimations.push(animate(authorLine, { scaleX: [0, 1] } as any, { duration: 0.6, delay: 0.3 } as any).finished);
+    }
+    if (newSpans.length > 0) {
+        enterAnimations.push(animate(
+            newSpans, 
+            { opacity: 1, y: [20, 0], rotateX: [90, 0] } as any, 
+            { duration: 0.5, delay: stagger(0.05), easing: [0.22, 1, 0.36, 1] } as any
+        ).finished);
+    }
+
+    await Promise.all(enterAnimations);
+    isAnimating = false;
+  }
+
+  // Eventos de botones
+  if (btnNext) {
+      btnNext.addEventListener("click", () => {
+        const nextIndex = (activeIndex + 1) % testimonials.length;
+        changeTestimonial(nextIndex, 1);
+      });
+  }
+
+  if (btnPrev) {
+      btnPrev.addEventListener("click", () => {
+        const prevIndex = (activeIndex - 1 + testimonials.length) % testimonials.length;
+        changeTestimonial(prevIndex, -1);
+      });
+  }
+
+  // Autoplay (6 segundos)
+  let autoplayTimer = setInterval(() => {
+    const nextIndex = (activeIndex + 1) % testimonials.length;
+    changeTestimonial(nextIndex, 1);
+  }, 6000);
+
+  // Pausar autoplay si el usuario interactúa
+  const resetAutoplay = () => {
+    clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(() => {
+        const nextIndex = (activeIndex + 1) % testimonials.length;
+        changeTestimonial(nextIndex, 1);
+    }, 6000);
+  };
+  
+  if (btnNext) btnNext.addEventListener("click", resetAutoplay);
+  if (btnPrev) btnPrev.addEventListener("click", resetAutoplay);
+
+  // --- TICKER INFINITO ---
+  if (tickerTrack) {
+      animate(
+          tickerTrack,
+          { x: ["0%", "-50%"] } as any,
+          { duration: 25, repeat: Infinity, easing: "linear" } as any
+      );
+  }
+
+  // --- PARALLAX MAGNÉTICO DEL MOUSE ---
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+
+  if (section) {
+      section.addEventListener("mousemove", (e: MouseEvent) => {
+        const rect = section.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        targetX = ((e.clientX - centerX) / rect.width) * 40;
+        targetY = ((e.clientY - centerY) / rect.height) * 20;
+      });
+  }
+
+  function renderParallax() {
+    currentX += (targetX - currentX) * 0.05;
+    currentY += (targetY - currentY) * 0.05;
+
+    if (bgNumber) {
+        bgNumber.style.marginLeft = `${currentX}px`;
+        bgNumber.style.marginTop = `${currentY}px`;
+    }
+
+    requestAnimationFrame(renderParallax);
+  }
+  
+  renderParallax();
+</script>

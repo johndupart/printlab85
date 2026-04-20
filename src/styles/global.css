@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
-
 @theme {
   /* Colores del diseño Prisma */
   --color-primary: #0db9f2;
   --color-background-dark: #101e22;
   --color-background-light: #f5f8f8;
   
-  /* Tus colores originales de Printlab (por si los necesitas) */
+  /* Tus colores originales de Printlab */
   --color-brand-blue: #1e70b6;
   --color-brand-darkprint: #1d1e1c;
 
+  /* Tipografías */
   --font-display: "Manrope", "sans-serif";
+  --font-dancing: "Dancing Script", cursive; /* ¡ESTA ES LA LÍNEA MÁGICA PARA V4! */
 }
 
 @layer base {
@@ -20,14 +21,15 @@
   }
 
   body {
-    /* Fondo oscuro profundo como el que pediste */
     background-color: var(--color-background-dark);
-    color: #f8fafc; /* Blanco pizarra suave para legibilidad */
+    color: #f8fafc;
     font-family: var(--font-display);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 }
+
+
 
 @layer components {
   /* Efecto Vidrio Esmerilado (Glassmorphism) */

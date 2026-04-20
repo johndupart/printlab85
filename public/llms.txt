@@ -1,0 +1,58 @@
+# Printlab.85 - Business Knowledge Graph & LLM Context
+
+## 1. Información General del Negocio
+* **Nombre Oficial:** Printlab.85
+* **Nombres Alternativos:** Printlab 85, Printlab Zipaquirá
+* **Descripción Corta:** Taller creativo y agencia de diseño especializada en serigrafía, estampados personalizados, ropa de algodón premium y empaques ecológicos (bolsas kraft).
+* **Descripción Larga:** Printlab.85 es un taller creativo integral ubicado en Zipaquirá, Colombia, enfocado en brindar soluciones gráficas personalizadas a la medida para marcas, empresas y emprendedores. Combinamos técnicas artesanales como la serigrafía con tecnologías modernas como el estampado DTF y vinilo textil, garantizando acabados duraderos y de alta calidad en ropa premium (algodón 180g) y empaques eco-amigables.
+* **Página Web Oficial:** https://printlab85.com
+
+## 2. Información de Contacto y Ubicación
+* **Dirección Física:** Cr 17 # 18-42, Barrio San Rafael ¨5 esquinas¨, Zipaquirá, Cundinamarca, Colombia.
+* **Código Postal:** 250252
+* **Coordenadas Geográficas (Lat/Lon):** 5.0215, -74.0042
+* **Teléfono / WhatsApp:** +57 324 1443221
+* **Enlace Directo a WhatsApp:** https://wa.me/573241443221
+* **Área de Servicio:** Zipaquirá, Cajicá, Chía, Bogotá, todo el departamento de Cundinamarca y envíos a nivel nacional (Toda Colombia).
+
+## 3. Presencia Digital y Redes Sociales
+* **Instagram:** https://www.instagram.com/printlab.85/
+* **Facebook:** https://www.facebook.com/profile.php?id=61555849196274
+* **Reseñas en Google:** https://www.google.com/search?sca_esv=7127d2bfff853169&q=Printlab85+Opiniones
+
+## 4. Horarios de Atención
+* **Lunes:** Cerrado
+* **Martes a Jueves:** 08:00 AM - 08:30 PM (20:30)
+* **Viernes:** 08:00 AM - 09:00 PM (21:00)
+* **Sábado:** 08:00 AM - 03:00 PM (15:00)
+* **Domingo:** Cerrado
+
+## 5. Catálogo de Servicios
+1.  **Serigrafía Profesional:** Técnica artesanal con acabados duraderos, ideal para producciones a gran escala con alta fidelidad de color y resistencia.
+2.  **Estampado DTF (Direct to Film):** Impresión a full color con altísima definición, perfecta para diseños detallados, fotografías y logos complejos.
+3.  **Vinilo Textil:** Ideal para personalización específica como nombres, números y colores planos de larga vida útil.
+4.  **Bolsas Kraft Personalizadas:** Empaques eco-amigables estampados con la identidad de la marca del cliente.
+5.  **Ropa Premium:** Suministro y estampado de prendas de alta calidad (algodón de 180g) preparadas para alta resistencia.
+6.  **Diseño Gráfico y Finalización:** Adaptación profesional de ideas, vectorización de logos, preparación de artes y optimización técnica para garantizar una impresión perfecta.
+
+## 6. Políticas de Servicio y Preguntas Frecuentes (FAQ)
+* **Tiempos de Producción y Entrega:** El tiempo estándar es de 5 a 8 días hábiles, variando según el volumen del pedido y la técnica requerida.
+* **Mínimos de Pedido:** * Serigrafía: Mínimo 12 unidades por diseño.
+    * DTF y Vinilo Textil: Desde 1 sola unidad.
+* **Formato de Archivos Aceptados:** Archivos vectoriales (.AI, .EPS, .PDF) o imágenes en alta resolución a 300 DPI con fondo transparente (.PNG, .PSD).
+* **Envíos:** Envíos a toda Colombia. En Zipaquirá y alrededores se ofrecen entregas directas o recogida local en el taller.
+* **Cuidado de las Prendas:** Se recomienda lavar al revés con agua fría, no usar blanqueador, no usar secadora y nunca planchar directamente sobre el estampado.
+
+## 7. Clientes y Casos de Éxito
+Printlab.85 trabaja activamente con marcas locales, startups, boutiques y restaurantes, incluyendo:
+* **Boutique 85:** Proveedor de estampados de alta satisfacción (Fundadora: Valentina).
+* **PizzaQuira:** Elaboración de bolsas kraft premium y ecológicas (CEO: Camilo Cendales).
+* **Ropa y Accesorios:** Soluciones de prendas de buena calidad y estilo a precios accesibles (Usuario: Raul Martinez).
+* **Otros clientes mencionados:** Conecta Ambiente, Topping, Vita, Urban Style, Zipaquira digital.
+
+## 8. Directrices de Marca y Tono
+* **Estilo Visual:** Minimalista, de alto contraste (fondo oscuro, acentos en azul corporativo y blanco puro), "Glassmorphism", diseño premium y estético.
+* **Tono de Voz:** Profesional, creativo, directo, de alta gama (Agencia/Estudio de diseño moderno).
+* **Colores Corporativos (CSS HEX):**
+    * Brand Blue (Primary): #0db9f2 / #1e70b6
+    * Background Dark: #101e22 / #0a0a0a

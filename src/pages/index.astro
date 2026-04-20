@@ -1,10 +1,15 @@
 ---
 import AboutSection from '../components/home/AboutSection.astro';
 import BrandMarquee from '../components/home/BrandMarquee.astro';
+import Contact from '../components/home/Contact.astro';
+import CtaMarquee from '../components/home/CtaMarquee.astro';
+import FaqAccordion from '../components/home/FaqAccordion.astro';
 import Features from '../components/home/Features.astro';
 import HeroScroll from '../components/home/HeroScroll.astro';
 import ProcessTimeline from '../components/home/ProcessTimeline.astro';
 import ServicesGrid from '../components/home/ServicesGrid.astro';
+import ServiceTable from '../components/home/ServiceTable.astro';
+import Testimonial from '../components/home/Testimonial.astro';
 import ZoomParallax from '../components/home/ZoomParallax.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -14,10 +19,15 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
 	<HeroScroll />
+		<BrandMarquee />
+
 	<AboutSection />
 	<ServicesGrid />
-	<BrandMarquee />
+	<ServiceTable />
 	<ProcessTimeline />
-		<ZoomParallax />
-
+	<ZoomParallax />
+	<Testimonial />
+	<FaqAccordion />
+	<Contact />
+	<CtaMarquee />
 </Layout>

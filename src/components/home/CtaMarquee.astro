@@ -1,0 +1,153 @@
+---
+// src/components/CtaMarquee.astro
+
+const images = [
+  "images/bolsa_kraft_movil.jpg",
+  "/images/servicio_bolsa_kraft.jpg",
+  "/images/tienda_movil.jpg",
+  "/images/taller_serigrafia_zipaquira.jpg",
+];
+
+const images2 = [
+  "/images/tienda.jpg",
+  "/images/serigrafia_zipaquira.jpg",
+  "/images/servicio_tienda.jpg",
+  "/images/mercancia.jpg",
+];
+---
+
+<section class="min-h-screen bg-background-dark text-white flex items-center overflow-hidden relative z-20 py-24 border-t border-white/5">
+  <div class="container mx-auto px-6 lg:px-12 max-w-7xl">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
+      
+      <div class="space-y-8 reveal-cta order-first lg:order-last">
+        <h2 class="text-5xl md:text-6xl lg:text-[5.5rem] font-black leading-[0.85] uppercase tracking-tighter text-white">
+          El futuro del <br/> diseño creativo.
+        </h2>
+        
+        <div class="space-y-1 text-slate-400 font-mono text-sm uppercase tracking-widest border-l-2 border-primary pl-4">
+          <p>Printlab.85</p>
+          <p>Taller & Serigrafía</p>
+        </div>
+        
+        <button
+          id="scramble-btn"
+          data-text="Inicia tu proyecto"
+          class="px-10 py-4 mt-4 bg-primary text-[#0a0a0a] rounded-full font-black uppercase tracking-widest text-xs md:text-sm hover:bg-white transition-colors duration-300"
+        >
+          Inicia tu proyecto
+        </button>
+      </div>
+
+      <div class="space-y-6 overflow-hidden reveal-cta order-last lg:order-first">
+        
+        <div class="group flex overflow-hidden gap-4">
+          <div class="marquee-track-reverse flex shrink-0 items-center gap-4 w-max">
+            {images.map((src, idx) => (
+              <div class="relative w-40 h-40 md:w-56 md:h-56 rounded-3xl overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-primary/50 transition-colors duration-500">
+                <img src={src} alt={`Galería ${idx}`} class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+              </div>
+            ))}
+            {/* Duplicado exacto para el loop */}
+            {images.map((src, idx) => (
+              <div class="relative w-40 h-40 md:w-56 md:h-56 rounded-3xl overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-primary/50 transition-colors duration-500">
+                <img src={src} alt={`Galería Loop ${idx}`} class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="group flex overflow-hidden gap-4">
+          <div class="marquee-track-normal flex shrink-0 items-center gap-4 w-max">
+            {images2.map((src, idx) => (
+              <div class="relative w-40 h-40 md:w-56 md:h-56 rounded-3xl overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-primary/50 transition-colors duration-500">
+                <img src={src} alt={`Galería ${idx + 5}`} class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+              </div>
+            ))}
+            {/* Duplicado exacto para el loop */}
+            {images2.map((src, idx) => (
+              <div class="relative w-40 h-40 md:w-56 md:h-56 rounded-3xl overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-primary/50 transition-colors duration-500">
+                <img src={src} alt={`Galería Loop ${idx + 5}`} class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animate, inView, stagger } from "motion";
+
+  // 1. Animación de entrada de la sección
+  const revealElements = Array.from(document.querySelectorAll(".reveal-cta")) as any;
+  if (revealElements.length > 0) {
+    inView(revealElements[0], () => {
+        animate(
+          revealElements, 
+          { opacity: [0, 1], y: [40, 0] } as any, 
+          { duration: 0.8, delay: stagger(0.2), easing: [0.22, 1, 0.36, 1] } as any
+        );
+    });
+  }
+
+  // 2. Lógica del Botón Scramble (Efecto Hacker)
+  const scrambleBtn = document.getElementById("scramble-btn");
+  if (scrambleBtn) {
+    const originalText = scrambleBtn.getAttribute("data-text") || "";
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let isScrambling = false;
+
+    scrambleBtn.addEventListener("mouseenter", () => {
+      if (isScrambling) return;
+      isScrambling = true;
+      
+      let iteration = 0;
+      const maxIterations = originalText.length;
+
+      const interval = setInterval(() => {
+        scrambleBtn.innerText = originalText
+          .split("")
+          .map((letter, index) => {
+            if (index < iteration) {
+              return originalText[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("");
+
+        if (iteration >= maxIterations) {
+          clearInterval(interval);
+          isScrambling = false;
+          scrambleBtn.innerText = originalText; 
+        }
+
+        iteration += 1 / 3;
+      }, 30);
+    });
+  }
+
+  // 3. Animaciones Marquee con Motion One
+  const trackNormal = document.querySelector(".marquee-track-normal") as any;
+  const trackReverse = document.querySelector(".marquee-track-reverse") as any;
+
+  if (trackNormal) {
+    // Normal: se mueve de derecha a izquierda (0 a -50%)
+    animate(
+      trackNormal, 
+      { x: ["0%", "-50%"] } as any, 
+      { duration: 40, repeat: Infinity, easing: "linear" } as any
+    );
+  }
+  
+  if (trackReverse) {
+    // Reverse: se mueve de izquierda a derecha (-50% a 0%)
+    animate(
+      trackReverse, 
+      { x: ["-50%", "0%"] } as any, 
+      { duration: 40, repeat: Infinity, easing: "linear" } as any
+    );
+  }
+</script>

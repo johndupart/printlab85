@@ -1,7 +1,12 @@
 ---
 const brands = [
-  "PIZZAQUIRA", "apecolombia", "forca_club", "Studio 85", 
-  "Printlab Crew", "Eco-Pack", "Design Co", "Textil Pro"
+  { name: "PIZZAQUIRA", src: "/images/logos/pizzaquira.png" },
+  { name: "ape", src: "/images/logos/ape.png" },
+  { name: "chivato", src: "/images/logos/chivato.png" },
+  { name: "eltopping", src: "/images/logos/eltopping.png" },
+  { name: "Conecta", src: "/images/logos/conecta.png" },
+  { name: "vita", src: "/images/logos/vita.png" },
+  { name: "zipaquiradigital", src: "/images/logos/zipaquiradigital.png" }
 ];
 ---
 
@@ -9,11 +14,11 @@ const brands = [
   <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-16">
     
    <div class="w-full lg:w-52 shrink-0 relative z-20 flex flex-col items-center text-center">
-  <p class="text-[10px] uppercase tracking-[0.5em] text-primary font-black leading-tight">
-    Marcas que <br class="hidden lg:block"/> confían en <br class="hidden lg:block"/> nosotros
-  </p>
-  <div class="h-px w-10 bg-primary/40 mt-4"></div>
-</div>
+      <p class="text-[10px] uppercase tracking-[0.5em] text-primary font-black leading-tight">
+        Marcas que <br class="hidden lg:block"/> confían en <br class="hidden lg:block"/> nosotros
+      </p>
+      <div class="h-px w-10 bg-primary/40 mt-4"></div>
+    </div>
 
     <div class="relative w-full flex-1 overflow-hidden py-4">
       
@@ -23,10 +28,12 @@ const brands = [
       <div class="flex overflow-hidden group">
         <div class="flex animate-marquee-pro whitespace-nowrap gap-12 md:gap-24 items-center">
           {[...brands, ...brands].map((brand) => (
-            <div class="flex items-center gap-6 md:gap-12 group/item">
-              <span class="text-2xl md:text-5xl font-black text-white/10 uppercase transition-all duration-500 group-hover/item:text-primary group-hover/item:scale-105 cursor-default select-none tracking-tighter italic">
-                {brand}
-              </span>
+            <div class="flex items-center gap-6 md:gap-20 group/item">
+             <img 
+  src={brand.src} 
+  alt={brand.name} 
+  class="h-12 md:h-16 w-auto max-w-[140px] md:max-w-[180px] object-contain opacity-80  hover:opacity-100 hover:grayscale-0 transition-all duration-500 hover:scale-105 select-none"
+/>
               <span class="text-primary/30 font-light text-2xl md:text-3xl">/</span>
             </div>
           ))}
@@ -38,7 +45,7 @@ const brands = [
 </section>
 
 <style>
-  /* Velocidad equilibrada: 30s es el "sweet spot" para lectura y dinamismo */
+  /* Velocidad equilibrada */
   .animate-marquee-pro {
     animation: marquee-ultra 112s linear infinite;
     display: flex;
@@ -59,7 +66,6 @@ const brands = [
     backface-visibility: hidden;
   }
 
-  /* En móviles muy pequeños, aceleramos un poco para que no se sienta lento */
   @media (max-width: 640px) {
     .animate-marquee-pro {
       animation-duration: 70s;

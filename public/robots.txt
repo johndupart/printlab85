@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://printlab85.com/sitemap.xml

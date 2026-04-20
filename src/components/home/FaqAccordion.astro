@@ -1,0 +1,161 @@
+---
+// src/components/FaqAccordion.astro
+
+const faqs = [
+  {
+    id: "01",
+    title: "¿Tiempos de entrega?",
+    content: "Nuestros tiempos de producción estándar son de 5 a 8 días hábiles dependiendo del volumen del pedido y la técnica de estampado elegida."
+  },
+  {
+    id: "02",
+    title: "¿Técnicas de impresión?",
+    content: "Manejamos serigrafía artesanal de alta durabilidad, estampado DTF full color para detalles complejos y vinilo textil para personalizaciones como nombres o números."
+  },
+  {
+    id: "03",
+    title: "¿Mínimo de pedido?",
+    content: "Para serigrafía requerimos un mínimo de 12 unidades por diseño. Para DTF y Vinilo Textil podemos trabajar desde 1 sola unidad."
+  },
+  {
+    id: "04",
+    title: "¿Formato de archivos?",
+    content: "Recomendamos enviar los diseños en formato vectorial (.AI, .EPS, .PDF) o imágenes en alta resolución (.PNG, .PSD) a 300 DPI con fondo transparente."
+  },
+  {
+    id: "05", // Esta será la que se abrirá por defecto
+    title: "¿Hacen envíos?",
+    content: "Sí, realizamos envíos a toda Colombia. En Zipaquirá y alrededores ofrecemos entregas directas o puedes recoger tu pedido en nuestro taller."
+  },
+  {
+    id: "06",
+    title: "¿Ofrecen diseño gráfico?",
+    content: "Sí. Contamos con un equipo de diseño que puede adaptar tus ideas, vectorizar logos o crear propuestas gráficas desde cero para tus prendas o empaques."
+  },
+  {
+    id: "07",
+    title: "¿Cuidado de prendas?",
+    content: "Lavar al revés con agua fría, no usar blanqueador, no usar secadora y nunca planchar directamente sobre el estampado para garantizar su máxima durabilidad."
+  },
+  {
+    id: "08",
+    title: "¿Cómo cotizar?",
+    content: "Puedes contactarnos por WhatsApp o correo con tu idea, cantidad de prendas y logo. Te enviaremos una cotización detallada en el menor tiempo posible."
+  }
+];
+---
+
+<section class="py-24 px-4 bg-background-dark border-t border-white/5 relative z-20">
+  <div class="w-full max-w-4xl mx-auto">
+    
+    <div class="mb-20">
+      <h2 class="text-brand-blue font-bold tracking-[0.2em] text-sm uppercase mb-4">Resolviendo Dudas</h2>
+      <p class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
+        Preguntas Frecuentes
+      </p>
+    </div>
+
+    <div class="w-full accordion-container">
+      {faqs.map((faq) => (
+        <div class="accordion-item border-b border-white/10 last:border-b-0">
+          
+          <button
+            class="accordion-trigger w-full flex items-start gap-4 py-6 md:py-8 text-left transition-all duration-300 group cursor-pointer outline-none"
+            data-target={`faq-${faq.id}`}
+            data-default={faq.id === "05" ? "true" : "false"}
+          >
+            <p class="text-xs font-mono text-slate-500 mt-2 md:mt-3 shrink-0">
+              {faq.id}
+            </p>
+            <h3 class="accordion-title text-3xl md:text-5xl font-black uppercase text-white/20 group-hover:text-white/40 transition-colors duration-300 tracking-tighter relative">
+              {faq.title}
+            </h3>
+          </button>
+
+          <div 
+            id={`faq-${faq.id}`} 
+            class="accordion-content grid transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]" 
+            style="grid-template-rows: 0fr;"
+          >
+            <div class="overflow-hidden">
+              <div class="pb-8 pl-8 md:pl-12 pr-4 text-slate-400 text-sm md:text-lg max-w-2xl font-light leading-relaxed">
+                {faq.content}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Lógica del Acordeón 100% Vanilla JS
+  const triggers = document.querySelectorAll('.accordion-trigger') as NodeListOf<HTMLButtonElement>;
+  const contents = document.querySelectorAll('.accordion-content') as NodeListOf<HTMLDivElement>;
+
+  // Función para cerrar todos los items
+  function closeAll() {
+    triggers.forEach(t => {
+      t.classList.remove('is-active');
+      const title = t.querySelector('.accordion-title');
+      if (title) {
+        title.classList.remove('text-primary');
+        title.classList.add('text-white/20', 'group-hover:text-white/40');
+      }
+    });
+    contents.forEach(c => {
+      c.style.gridTemplateRows = '0fr';
+    });
+  }
+
+  // Función para abrir un item específico
+  function openItem(trigger: HTMLButtonElement) {
+    const targetId = trigger.getAttribute('data-target');
+    const targetContent = document.getElementById(targetId || "");
+    const title = trigger.querySelector('.accordion-title');
+
+    trigger.classList.add('is-active');
+    
+    // Cambiamos el color a primary cuando está activo
+    if (title) {
+      title.classList.remove('text-white/20', 'group-hover:text-white/40');
+      title.classList.add('text-primary');
+    }
+
+    // El truco mágico de Grid para animar la altura fluidamente
+    if (targetContent) {
+      targetContent.style.gridTemplateRows = '1fr';
+    }
+  }
+
+  // Inicializar eventos
+  triggers.forEach(trigger => {
+    // Abrir el que está marcado por defecto (el ID 05)
+    if (trigger.getAttribute('data-default') === 'true') {
+      openItem(trigger);
+    }
+
+    trigger.addEventListener('click', () => {
+      const isActive = trigger.classList.contains('is-active');
+
+      // Siempre cerramos todos primero (comportamiento type="single")
+      closeAll();
+
+      // Si el que clickeamos NO estaba activo, lo abrimos. 
+      // Si ya estaba activo, se queda cerrado (Toggle)
+      if (!isActive) {
+        openItem(trigger);
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Previene el highlight azul en móviles al hacer tap */
+  .accordion-trigger {
+    -webkit-tap-highlight-color: transparent;
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+// Extraemos la información de la imagen y la dividimos por categorías
+const bolsas = [
+  { title: "Bolsas Kraft", desc: "Bolsas en papel kraft con logo impreso", uso: "Negocios, domicilios, branding" },
+  { title: "Bolsas Ecológicas", desc: "Alternativa sostenible para marcas", uso: "Empresas, eventos" }
+];
+
+const prendas = [
+  { title: "Oversize", desc: "Estilo urbano" },
+  { title: "Regular", desc: "Clásico" },
+  { title: "Boxy", desc: "Streetwear" }
+];
+
+const materiales = [
+  { title: "180g", desc: "Ligero" },
+  { title: "200g", desc: "Balance" },
+  { title: "240g", desc: "Alta calidad" },
+  { title: "280g", desc: "Streetwear premium" }
+];
+---
+
+<section class="py-24 px-6 bg-background-dark border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    
+    <div  id="bolsas" class="mb-12">
+      <h2 class="text-primary font-bold tracking-[0.3em] text-xs uppercase mb-4">Especificaciones</h2>
+      <p class="text-4xl md:text-5xl font-dancing text-white  tracking-tighter ">Detalles de Producto</p>
+    </div>
+
+    <div class="mb-16">
+        <h3  class="text-xl font-black text-white mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Bolsas Kraft y Ecológicas</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {bolsas.map((item) => (
+            <div class="glass-card border border-white/10 p-6 rounded-[2rem] hover:border-primary/50 transition-all duration-500 group">
+              <div class="flex flex-col gap-4">
+                <h3 class="text-white font-black text-lg uppercase tracking-wider">{item.title}</h3>
+                
+                <div class="grid grid-cols-1 gap-2">
+                    <div class="flex justify-between border-b border-white/5 pb-2">
+                        <span class="text-[10px] uppercase text-slate-500 font-bold shrink-0">Desc</span>
+                        <span class="text-[11px] text-slate-300 text-right pl-4">{item.desc}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-[10px] uppercase text-slate-500 font-bold shrink-0">Uso</span>
+                        <span class="text-[11px] text-primary italic text-right pl-4">{item.uso}</span>
+                    </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+    </div>
+    <div id="ropa" class="flex justify-end py-8">
+<p class="text-4xl md:text-5xl font-bold text-white tracking-normal font-dancing">Serigrafía & Estampados</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        
+        <div>
+          
+            <h3 class="text-sm font-black text-white mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Tipos de Prenda</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {prendas.map((item) => (
+                <div class="glass-card border border-white/10 p-6 rounded-[2rem] hover:border-primary/50 transition-all duration-500 group">
+                  <div class="flex flex-col gap-4">
+                    <h3 class="text-white font-black text-lg uppercase tracking-wider">{item.title}</h3>
+                    
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="flex justify-between">
+                            <span class="text-[10px] uppercase text-slate-500 font-bold">Estilo</span>
+                            <span class="text-[11px] text-slate-300 text-right">{item.desc}</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-sm font-black text-white mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Gramajes de Algodón</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {materiales.map((item) => (
+                <div class="glass-card border border-white/10 p-6 rounded-[2rem] hover:border-primary/50 transition-all duration-500 group">
+                  <div class="flex flex-col gap-4">
+                    <h3 class="text-white font-black text-lg uppercase tracking-wider">{item.title}</h3>
+                    
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="flex justify-between">
+                            <span class="text-[10px] uppercase text-slate-500 font-bold">Perfil</span>
+                            <span class="text-[11px] text-slate-300 text-right">{item.desc}</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+        </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .glass-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+  }
+</style>

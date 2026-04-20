@@ -10,6 +10,8 @@ export default {
             },
             fontFamily: {
                 display: ["Manrope", "sans-serif"],
+                // Déjalo solo con comillas simples
+                dancing: ['Dancing Script', 'cursive'], 
             }
         },
     },

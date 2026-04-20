@@ -2,10 +2,11 @@
 // src/components/Header.astro
 ---
 
-<header class="fixed top-6 left-0 w-full z-[100] flex justify-center ">
-    <nav class="flex items-center border mx-4 max-md:w-full max-md:justify-between border-slate-700/50 px-6 py-2 rounded-full text-white bg-brand-dark/40 backdrop-blur-xl transition-all duration-300 shadow-lg shadow-black/20 relative">
+<header class="fixed top-6 left-0 w-full z-[100] flex justify-center">
+    
+    <nav class="flex items-center border mx-4 max-md:w-full max-md:justify-between border-slate-700/50 px-6 py-2 rounded-full text-white bg-brand-dark/40 backdrop-blur-xl transition-all duration-300 shadow-lg shadow-black/20 relative z-[100]">
         
-        <a href="/" class="flex items-center">
+        <a href="/" class="flex items-center relative z-[110]">
             <img 
                 src="/logo.svg" 
                 alt="Printlab 85 Logo" 
@@ -14,13 +15,13 @@
         </a>
 
         <div class="hidden md:flex items-center gap-7 ml-8">
-            {['Servicios', 'Como Funciona', 'Ropa', 'Taller', 'Contacto'].map((item) => (
+            {['Servicios', 'Como Funciona', 'Ropa & Taller', 'Ubicación'].map((item) => (
                 <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} class="relative block overflow-hidden group h-[20px]">
                     <div class="transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1/2">
-                        <span class="flex items-center justify-center h-[20px] uppercase tracking-wider font-medium text-[12px] whitespace-nowrap">
+                        <span class="flex items-center justify-center h-[20px] uppercase tracking-wider font-medium text-[14px] whitespace-nowrap">
                             {item}
                         </span>
-                        <span class="flex items-center justify-center h-[20px] uppercase tracking-wider font-bold text-[12px] text-brand-blue whitespace-nowrap">
+                        <span class="flex items-center justify-center h-[20px] uppercase tracking-wider font-bold text-[14px] text-brand-blue whitespace-nowrap">
                             {item}
                         </span>
                     </div>
@@ -29,9 +30,14 @@
         </div>
 
         <div class="hidden ml-14 md:flex items-center gap-4">
-            <button class="bg-white text-black px-5 py-2 rounded-full text-[12px] font-bold uppercase hover:bg-brand-blue hover:text-white hover:shadow-[0px_0px_25px_rgba(30,112,182,0.6)] transition-all duration-500">
-                Cotizar ahora
-            </button>
+           <a 
+  href="https://wa.me/573241443221?text=Hola%20Printlab!%20Me%20gustaría%20hacer%20una%20cotización." 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  class="bg-white text-black px-5 py-2 rounded-full text-[12px] font-bold uppercase hover:bg-brand-blue hover:text-white hover:shadow-[0px_0px_25px_rgba(30,112,182,0.6)] transition-all duration-500 inline-block text-center"
+>
+  Cotizar ahora
+</a>
         </div>
 
         <button id="menuToggle" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 focus:outline-none group relative z-[110]">
@@ -40,25 +46,54 @@
             <span id="line3" class="w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
         </button>
 
-        <div id="mobileMenu" class="fixed invisible opacity-0 translate-y-4 top-20 left-0 right-0 mx-auto w-[95%] bg-[#0a0a0a]/fb border border-slate-700/20 rounded-[2.5rem] p-10 flex flex-col items-center gap-8 text-center backdrop-blur-[40px] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[105]">
-            <div class="flex flex-col gap-6 w-full">
-                <a class="mobile-link text-xl font-black uppercase tracking-tighter text-white hover:text-brand-blue transition-colors" href="#servicios">Servicios</a>
-                <a class="mobile-link text-xl font-black uppercase tracking-tighter text-white hover:text-brand-blue transition-colors" href="#como-funciona">Como Funciona</a>
-                <a class="mobile-link text-xl font-black uppercase tracking-tighter text-white hover:text-brand-blue transition-colors" href="#ropa">Ropa</a>
-                <a class="mobile-link text-xl font-black uppercase tracking-tighter text-white hover:text-brand-blue transition-colors" href="#taller">Taller</a>
-                <a class="mobile-link text-xl font-black uppercase tracking-tighter text-white hover:text-brand-blue transition-colors" href="#contacto">Contacto</a>
+    </nav>
+
+    <div id="mobileMenu" class="fixed inset-0 w-full h-[100dvh] bg-[#0a0a0a]/98 backdrop-blur-2xl z-[90] invisible opacity-0 flex flex-col justify-center px-6 md:hidden">
+        <div class="flex flex-col gap-8 w-full max-w-md mx-auto mt-16">
+            
+            <a class="mobile-link group flex flex-col gap-1 text-white hover:text-brand-blue transition-colors overflow-hidden" href="#servicios">
+                <span class="mobile-link-anim text-xs font-mono text-white/30 group-hover:text-brand-blue transition-colors">01</span>
+                <span class="mobile-link-anim text-5xl font-black uppercase tracking-tighter leading-none">Servicios</span>
+            </a>
+            
+            <a class="mobile-link group flex flex-col gap-1 text-white hover:text-brand-blue transition-colors overflow-hidden" href="#como-funciona">
+                <span class="mobile-link-anim text-xs font-mono text-white/30 group-hover:text-brand-blue transition-colors">02</span>
+                <span class="mobile-link-anim text-5xl font-black uppercase tracking-tighter leading-none">Proceso</span>
+            </a>
+            
+            <a class="mobile-link group flex flex-col gap-1 text-white hover:text-brand-blue transition-colors overflow-hidden" href="#parallax-container">
+                <span class="mobile-link-anim text-xs font-mono text-white/30 group-hover:text-brand-blue transition-colors">03</span>
+                <span class="mobile-link-anim text-5xl font-black uppercase tracking-tighter leading-none">Ropa & Taller</span>
+            </a>
+            
+            <a class="mobile-link group flex flex-col gap-1 text-white hover:text-brand-blue transition-colors overflow-hidden" href="#contacto">
+                <span class="mobile-link-anim text-xs font-mono text-white/30 group-hover:text-brand-blue transition-colors">04</span>
+                <span class="mobile-link-anim text-5xl font-black uppercase tracking-tighter leading-none">Ubicación</span>
+            </a>
+            
+            <div class="overflow-hidden my-4">
+                <div class="mobile-link-anim w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
             </div>
             
-            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-            
-            <button class="w-full py-5 bg-brand-blue text-white rounded-2xl text-xl font-black uppercase tracking-widest shadow-[0_10px_30px_rgba(30,112,182,0.4)] active:scale-95 transition-transform">
-                Cotizar Ahora
-            </button>
+            <div class="overflow-hidden">
+            <a 
+    href="https://wa.me/573241443221?text=Hola%20Printlab!%20Me%20gustaría%20hacer%20una%20cotización." 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="mobile-link-anim block text-center w-full py-5 bg-brand-blue text-white rounded-full text-lg font-black uppercase tracking-widest active:scale-95 transition-transform shadow-[0_10px_30px_rgba(30,112,182,0.4)]"
+>
+    Cotizar Ahora
+</a>
+            </div>
+
         </div>
-    </nav>
+    </div>
+
 </header>
 
 <script>
+    import { animate, stagger } from "motion";
+
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const line1 = document.getElementById('line1');
@@ -67,30 +102,47 @@
     const body = document.body;
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
+    let isMenuOpen = false;
+
     const toggleMenu = () => {
-        const isOpen = mobileMenu?.classList.contains('visible');
+        isMenuOpen = !isMenuOpen;
         
-        if (!isOpen) {
-            // Abrir
-            mobileMenu?.classList.remove('invisible', 'opacity-0', 'translate-y-4');
-            mobileMenu?.classList.add('visible', 'opacity-100', 'translate-y-0');
+        if (isMenuOpen) {
+            // Mostrar contenedor móvil
+            mobileMenu?.classList.remove('invisible');
             
             // Animación X
             line1?.classList.add('rotate-45', 'translate-y-[8px]');
             line2?.classList.add('opacity-0', 'scale-0');
             line3?.classList.add('-rotate-45', '-translate-y-[8px]');
             
+            // Animación de Opacidad del Fondo Overlay
+            animate(mobileMenu as any, { opacity: [0, 1] } as any, { duration: 0.4, easing: [0.22, 1, 0.36, 1] } as any);
+            
+            // Animación en Cascada (Stagger) de los Links
+            const animElements = Array.from(document.querySelectorAll('.mobile-link-anim')) as any;
+            animate(
+                animElements,
+                { opacity: [0, 1], y: [40, 0] } as any,
+                { duration: 0.6, delay: stagger(0.08, { start: 0.2 } as any), easing: [0.22, 1, 0.36, 1] } as any
+            );
+
             // Bloquear Scroll
             body.style.overflow = 'hidden';
-        } else {
-            // Cerrar
-            mobileMenu?.classList.add('invisible', 'opacity-0', 'translate-y-4');
-            mobileMenu?.classList.remove('visible', 'opacity-100', 'translate-y-0');
             
-            // Revertir Icono
+        } else {
+            // Revertir a Hamburguesa
             line1?.classList.remove('rotate-45', 'translate-y-[8px]');
             line2?.classList.remove('opacity-0', 'scale-0');
             line3?.classList.remove('-rotate-45', '-translate-y-[8px]');
+            
+            // Animar salida del Fondo y Ocultar
+            if (mobileMenu) {
+                animate(mobileMenu as any, { opacity: [1, 0] } as any, { duration: 0.4, easing: [0.22, 1, 0.36, 1] } as any)
+                .finished.then(() => {
+                    if (!isMenuOpen) mobileMenu.classList.add('invisible');
+                });
+            }
             
             // Habilitar Scroll
             body.style.overflow = '';
@@ -99,24 +151,22 @@
 
     menuToggle?.addEventListener('click', toggleMenu);
 
-    // Cerrar menú al hacer clic en un enlace y permitir el scroll
+    // Cerrar menú al hacer clic en un enlace
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (mobileMenu?.classList.contains('visible')) {
-                toggleMenu();
-            }
+            if (isMenuOpen) toggleMenu();
         });
     });
 </script>
 
 <style>
-    /* Soporte para navegadores que no manejan bien el backdrop-blur */
+    /* Soporte para navegadores que no manejan bien backdrop-blur */
     #mobileMenu {
         background-color: rgba(10, 10, 10, 0.98);
     }
     
-    /* Evita que el tap de móvil resalte en azul feo */
-    #menuToggle, .mobile-link {
+    /* Evita el highlight azul en iOS al tocar */
+    #menuToggle, .mobile-link, button {
         -webkit-tap-highlight-color: transparent;
     }
 </style>

@@ -4,7 +4,6 @@ import BrandMarquee from '../components/home/BrandMarquee.astro';
 import Contact from '../components/home/Contact.astro';
 import CtaMarquee from '../components/home/CtaMarquee.astro';
 import FaqAccordion from '../components/home/FaqAccordion.astro';
-import Features from '../components/home/Features.astro';
 import HeroScroll from '../components/home/HeroScroll.astro';
 import ProcessTimeline from '../components/home/ProcessTimeline.astro';
 import ServicesGrid from '../components/home/ServicesGrid.astro';
@@ -13,59 +12,99 @@ import Testimonial from '../components/home/Testimonial.astro';
 import ZoomParallax from '../components/home/ZoomParallax.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Optimización SEO, GEO y AEO específica para la portada (Home)
-// Estos datos sobreescriben los props por defecto del Layout
-const pageTitle = "Printlab.85 | Taller de Serigrafía y Estampados en Zipaquirá";
-const pageDescription = "En Printlab.85 transformamos tus ideas en ropa premium y empaques ecológicos. Taller creativo en Zipaquirá especializado en serigrafía, DTF, vinilo textil y bolsas kraft.";
+const pageTitle =
+  'Printlab.85 | Serigrafía, DTF, ropa y accesorios en Zipaquirá';
 
-// Datos Enriquecidos Específicos de la Página (WebSite y WebPage)
-// Esto crea una "telaraña semántica" uniendo esta página con tu negocio local
-const homeSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
+const pageDescription =
+  'Serigrafía, estampado DTF, vinilo textil, camisetas y bolsas kraft personalizadas en Zipaquirá. Cotiza producción para marcas, empresas y emprendimientos.';
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: [
     {
-      "@type": "WebSite",
-      "@id": "https://printlab85.com/#website",
-      "url": "https://printlab85.com",
-      "name": "Printlab.85",
-      "description": pageDescription,
-      "publisher": {
-        "@id": "https://printlab85.com/#business" // Conecta con el schema del Layout
-      },
-      "inLanguage": "es-CO"
+      '@type': 'Question',
+      name: '¿Cuáles son los tiempos de entrega?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nuestros tiempos de producción estándar son de 3 a 8 días hábiles dependiendo del volumen del pedido y la técnica de estampado elegida.'
+      }
     },
     {
-      "@type": "WebPage",
-      "@id": "https://printlab85.com/#webpage",
-      "url": "https://printlab85.com",
-      "name": pageTitle,
-      "isPartOf": {
-        "@id": "https://printlab85.com/#website"
-      },
-      "about": {
-        "@id": "https://printlab85.com/#business"
-      },
-      "description": pageDescription,
-      "inLanguage": "es-CO"
+      '@type': 'Question',
+      name: '¿Qué técnicas de impresión manejan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Manejamos serigrafía artesanal de alta durabilidad, estampado DTF full color para detalles complejos y vinilo textil para personalizaciones como nombres o números.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cuál es el pedido mínimo?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Para serigrafía requerimos un mínimo de 12 unidades por diseño. Para DTF y vinilo textil podemos trabajar desde una sola unidad.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: '¿En qué formato debo enviar los archivos?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Recomendamos enviar los diseños en formato vectorial AI, EPS o PDF, o imágenes PNG y PSD en alta resolución a 300 DPI con fondo transparente.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: '¿Printlab85 realiza envíos?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sí, realizamos envíos a toda Colombia. En Zipaquirá y alrededores ofrecemos entregas directas o puedes recoger tu pedido en nuestro taller.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: '¿Ofrecen servicio de diseño gráfico?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sí. Podemos adaptar tus ideas, vectorizar logos o crear propuestas gráficas desde cero para prendas y empaques.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cómo debo cuidar las prendas estampadas?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Recomendamos lavar las prendas al revés con agua fría, no usar blanqueador ni secadora y no planchar directamente sobre el estampado.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cómo puedo solicitar una cotización?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Puedes contactarnos por WhatsApp con tu idea, cantidad de prendas y logo. Te enviaremos una cotización detallada.'
+      }
     }
   ]
 };
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-    
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(homeSchema)} />
-
-    <HeroScroll />
-    <BrandMarquee />
-    <AboutSection />
-    <ServicesGrid />
-    <ServiceTable />
-    <ProcessTimeline />
-    <ZoomParallax />
-    <Testimonial />
-    <FaqAccordion />
-    <Contact />
-    <CtaMarquee />
-    
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  image="/og-image.jpg"
+  imageAlt="Printlab85, serigrafía y estampados personalizados en Zipaquirá"
+  schemaNodes={[faqSchema]}
+>
+  <HeroScroll />
+  <BrandMarquee />
+  <AboutSection />
+  <ServicesGrid />
+  <ServiceTable />
+  <ProcessTimeline />
+  <ZoomParallax />
+  <Testimonial />
+  <FaqAccordion />
+  <Contact />
+  <CtaMarquee />
 </Layout>

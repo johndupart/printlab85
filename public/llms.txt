@@ -8,7 +8,7 @@
 * **Página Web Oficial:** https://printlab85.com
 
 ## 2. Información de Contacto y Ubicación
-* **Dirección Física:** Cr 17 # 18-42, Barrio San Rafael ¨5 esquinas¨, Zipaquirá, Cundinamarca, Colombia.
+* **Dirección Física:** Carrera 17 #18-42, barrio San Rafael, sector Cinco Esquinas, Zipaquirá, Cundinamarca, Colombia.
 * **Código Postal:** 250252
 * **Coordenadas Geográficas (Lat/Lon):** 5.0215, -74.0042
 * **Teléfono / WhatsApp:** +57 324 1443221
@@ -36,7 +36,7 @@
 6.  **Diseño Gráfico y Finalización:** Adaptación profesional de ideas, vectorización de logos, preparación de artes y optimización técnica para garantizar una impresión perfecta.
 
 ## 6. Políticas de Servicio y Preguntas Frecuentes (FAQ)
-* **Tiempos de Producción y Entrega:** El tiempo estándar es de 5 a 8 días hábiles, variando según el volumen del pedido y la técnica requerida.
+* **Tiempos de Producción y Entrega:** El tiempo estándar es de 3 a 8 días hábiles, variando según el volumen del pedido y la técnica requerida.
 * **Mínimos de Pedido:** * Serigrafía: Mínimo 12 unidades por diseño.
     * DTF y Vinilo Textil: Desde 1 sola unidad.
 * **Formato de Archivos Aceptados:** Archivos vectoriales (.AI, .EPS, .PDF) o imágenes en alta resolución a 300 DPI con fondo transparente (.PNG, .PSD).

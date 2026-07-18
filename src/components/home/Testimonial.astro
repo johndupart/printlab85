@@ -66,7 +66,11 @@ const initial = testimonials[0];
         </div>
 
         <div class="relative mb-12 min-h-[180px] md:min-h-[140px]">
-          <blockquote id="quote-container" class="text-3xl md:text-5xl font-light text-white leading-[1.2] tracking-tight">
+          <blockquote
+            id="quote-container"
+            aria-live="polite"
+            aria-atomic="true"
+            class="text-3xl md:text-5xl font-light text-white leading-[1.2] tracking-tight">
             </blockquote>
         </div>
 
@@ -96,6 +100,10 @@ const initial = testimonials[0];
 
             <button
               id="btn-prev"
+              type="button"
+              aria-label="Mostrar testimonio anterior"
+              aria-controls="quote-container"
+              title="Testimonio anterior"
               class="group relative w-12 h-12 rounded-full border border-white/10 flex items-center justify-center overflow-hidden bg-white/5 hover:border-primary/50 transition-all active:scale-95"
             >
               <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -105,6 +113,10 @@ const initial = testimonials[0];
             </button>
             <button
               id="btn-next"
+              type="button"
+              aria-label="Mostrar siguiente testimonio"
+              aria-controls="quote-container"
+              title="Siguiente testimonio"
               class="group relative w-12 h-12 rounded-full border border-white/10 flex items-center justify-center overflow-hidden bg-white/5 hover:border-primary/50 transition-all active:scale-95"
             >
               <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>

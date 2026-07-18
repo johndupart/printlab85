@@ -54,18 +54,39 @@ const images = [
     </div>
 </section>
 
-<dialog id="lightbox" class="bg-black/95 w-full h-full max-w-none max-h-none m-0 p-0 border-none backdrop:bg-black/95 backdrop:backdrop-blur-2xl outline-none overflow-hidden text-white">
+<dialog
+    id="lightbox"
+    aria-label="Galería ampliada de proyectos de Printlab.85"
+    class="bg-black/95 w-full h-full max-w-none max-h-none m-0 p-0 border-none backdrop:bg-black/95 backdrop:backdrop-blur-2xl outline-none overflow-hidden text-white">
     <div class="relative w-full h-full flex items-center justify-center p-4 md:p-12">
         
-        <button id="closeLightbox" class="absolute top-8 right-8 p-2 hover:bg-white/10 rounded-full transition-all z-[60]">
+        <button
+            id="closeLightbox"
+            type="button"
+            aria-label="Cerrar galería"
+            aria-controls="lightbox"
+            title="Cerrar galería"
+            class="absolute top-8 right-8 p-2 hover:bg-white/10 rounded-full transition-all z-[60]">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
 
-        <button id="prevBtn" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all z-50">
+        <button
+            id="prevBtn"
+            type="button"
+            aria-label="Mostrar imagen anterior"
+            aria-controls="lightboxImg"
+            title="Imagen anterior"
+            class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all z-50">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
 
-        <button id="nextBtn" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all z-50">
+        <button
+            id="nextBtn"
+            type="button"
+            aria-label="Mostrar siguiente imagen"
+            aria-controls="lightboxImg"
+            title="Siguiente imagen"
+            class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 rounded-full transition-all z-50">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
 

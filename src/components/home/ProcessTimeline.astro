@@ -4,25 +4,25 @@ const steps = [
     num: "01",
     title: "Diseño & Separación",
     desc: "Optimizamos tu arte para serigrafía, separando cada color para crear los originales mecánicos de alta precisión.",
-    icon: "draw"
+    iconPath: "M12 20h9 M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5Z"
   },
   {
     num: "02",
     title: "Revelado de Marcos",
     desc: "Transferimos el diseño a mallas emulsionadas con luz UV, creando la matriz perfecta para el paso de la tinta.",
-    icon: "grid_view"
+    iconPath: "M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h6v6h-6v-6Z"
   },
   {
     num: "03",
     title: "Estampado Manual",
     desc: "Aplicamos tintas plastisol o base agua capa por capa, logrando texturas únicas y colores vibrantes.",
-    icon: "format_paint"
+    iconPath: "M14.5 4.5 19.5 9.5 9 20H4v-5L14.5 4.5ZM12 7l5 5"
   },
   {
     num: "04",
     title: "Curado Térmico",
     desc: "Pasamos la prenda por un túnel de calor a 180°C para fusionar la tinta con la fibra, garantizando durabilidad eterna.",
-    icon: "local_fire_department"
+    iconPath: "M12 22c4.4 0 8-3.2 8-7.3 0-3.1-1.7-5.9-5-8.7.1 2.9-1.2 4.5-2.7 5.7.2-4.2-1.8-7.4-4.8-9.7.5 4.5-3.5 7.1-3.5 12.4C4.5 18.8 7.9 22 12 22Z"
   }
 ];
 ---
@@ -52,9 +52,20 @@ const steps = [
             <span class="text-5xl font-black text-white/5 group-hover:text-brand-blue/20 transition-colors duration-500 leading-none">
               {step.num}
             </span>
-            <span class="material-symbols-outlined text-brand-blue text-3xl opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all">
-              {step.icon}
-            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-brand-blue text-3xl w-8 h-8 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d={step.iconPath} />
+            </svg>
           </div>
 
           <div class="mt-auto">

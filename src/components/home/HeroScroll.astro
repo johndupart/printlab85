@@ -25,6 +25,9 @@ const sections = [
 ---
 
 <section id="hero-container" class="relative bg-background-dark">
+  <h1 class="sr-only">
+    Printlab.85: serigrafía, estampado DTF, ropa y bolsas kraft en Zipaquirá
+  </h1>
   <div class="sticky top-0 h-screen w-full overflow-hidden">
     
     <div class="absolute inset-0 z-0">
@@ -55,7 +58,7 @@ const sections = [
     <div class="relative z-10 h-full w-full grid grid-cols-12 grid-rows-6 px-8 py-12 text-white">
       
       <div class="col-span-12 row-start-1 self-start text-center">
-        <h2 class="text-xs font-bold tracking-[0.4em] opacity-40 uppercase">Printlab Studio / Process</h2>
+        <p class="text-xs font-bold tracking-[0.4em] opacity-40 uppercase">Printlab Studio / Process</p>
       </div>
 
       <div class="col-span-12 row-start-3 row-end-5 flex items-center justify-between pointer-events-none">
@@ -72,12 +75,12 @@ const sections = [
 
         <div class="flex-1 text-center relative h-40 flex items-center justify-center">
             {sections.map((s, i) => (
-                <h1 
+                <p
                     data-title-index={i} 
                     class="absolute text-[clamp(2.5rem,12vw,9rem)] font-black leading-none opacity-0 translate-y-12 transition-all duration-1000 ease-out text-white tracking-tighter"
                 >
                     {s.title}
-                </h1>
+                </p>
             ))}
         </div>
 

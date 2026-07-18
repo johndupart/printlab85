@@ -8,10 +8,10 @@ const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${enc
 <div 
   id="sticky-notification" 
   class="fixed z-[99] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none
-         /* Móvil: Pegado abajo, ancho completo, oculto hacia abajo */
-         bottom-5 left-0 w-full translate-y-full opacity-0
-         /* Desktop (sm en adelante): Flotante, centrado, oculto hacia abajo */
-         sm:bottom-8 sm:left-1/2 sm:-translate-x-1/2 sm:w-[90%] sm:max-w-2xl sm:translate-y-24 sm:opacity-0"
+         /* Móvil: Pegado abajo, ancho completo, oculto hacia abajo al 150% */
+         bottom-2 left-0 w-full translate-y-[150%] opacity-0
+         /* Desktop (sm en adelante): Flotante, centrado, oculto hacia abajo al 150% */
+         sm:bottom-8 sm:left-1/2 sm:-translate-x-1/2 sm:w-[90%] sm:max-w-2xl sm:translate-y-[150%] sm:opacity-0"
   role="complementary"
   aria-label="Cotización rápida por WhatsApp"
 >
@@ -62,7 +62,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${enc
              sm:top-1/2 sm:-translate-y-1/2 sm:right-4 sm:p-2"
       aria-label="Cerrar notificación"
     >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
   </div>
 </div>
@@ -71,6 +71,9 @@ const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${enc
   function initConversionCTA() {
     const sticky = document.getElementById('sticky-notification');
     const closeBtn = document.getElementById('close-sticky');
+
+    // Detectar el footer de la página.
+    const footer = document.querySelector('footer, #footer, [data-footer]');
     
     let isClosedManually = false;
 
@@ -82,68 +85,152 @@ const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${enc
       const documentHeight = document.documentElement.scrollHeight;
       const windowHeight = window.innerHeight;
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollableHeight = Math.max(documentHeight - windowHeight, 1);
       
-      // Calcular porcentaje de scroll
-      const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+      // Calcular porcentaje de scroll.
+      const scrollPercentage = (scrollTop / scrollableHeight) * 100;
 
-      // Detectar breakpoint sm (640px)
+      // Ocultar cuando falte el último 10% de la página.
+      const reachedLastTenPercent = scrollPercentage >= 90;
+
+      // Ocultar también cuando el footer entre en la pantalla.
+      const footerIsVisible = footer
+        ? footer.getBoundingClientRect().top <= windowHeight
+        : false;
+
+      // Detectar breakpoint sm (640px).
       const isDesktop = window.innerWidth >= 640; 
 
-      // Mostrar después del 40% de scroll (para que lo vean antes de llegar al final)
-      if (scrollPercentage >= 40) {
+      // Mostrar después del 40% y ocultar al llegar al último 10% o al footer.
+      if (
+        scrollPercentage >= 40 &&
+        !reachedLastTenPercent &&
+        !footerIsVisible
+      ) {
         // Mostrar
         sticky.classList.remove('pointer-events-none');
+
         if (isDesktop) {
-          sticky.classList.remove('sm:translate-y-24', 'sm:opacity-0');
-          sticky.classList.add('sm:translate-y-0', 'sm:opacity-100');
+          sticky.classList.remove(
+            'translate-y-0',
+            'opacity-100',
+            'sm:translate-y-[150%]',
+            'sm:opacity-0'
+          );
+
+          sticky.classList.add(
+            'sm:translate-y-0',
+            'sm:opacity-100'
+          );
         } else {
-          sticky.classList.remove('translate-y-full', 'opacity-0');
-          sticky.classList.add('translate-y-0', 'opacity-100');
+          sticky.classList.remove(
+            'sm:translate-y-0',
+            'sm:opacity-100',
+            'translate-y-[150%]',
+            'opacity-0'
+          );
+
+          sticky.classList.add(
+            'translate-y-0',
+            'opacity-100'
+          );
         }
       } else {
         // Ocultar
         sticky.classList.add('pointer-events-none');
+
         if (isDesktop) {
-          sticky.classList.add('sm:translate-y-24', 'sm:opacity-0');
-          sticky.classList.remove('sm:translate-y-0', 'sm:opacity-100');
+          sticky.classList.add(
+            'sm:translate-y-[150%]',
+            'sm:opacity-0'
+          );
+
+          sticky.classList.remove(
+            'sm:translate-y-0',
+            'sm:opacity-100'
+          );
         } else {
-          sticky.classList.add('translate-y-full', 'opacity-0');
-          sticky.classList.remove('translate-y-0', 'opacity-100');
+          sticky.classList.add(
+            'translate-y-[150%]',
+            'opacity-0'
+          );
+
+          sticky.classList.remove(
+            'translate-y-0',
+            'opacity-100'
+          );
         }
       }
     };
 
     closeBtn.addEventListener('click', () => {
       isClosedManually = true;
+      
+      // Remueve pointer events y opacidad.
       sticky.classList.add('opacity-0', 'pointer-events-none');
       
+      // Aplicar las clases para enviarlo lejos (150% abajo).
       const isDesktop = window.innerWidth >= 640;
+
       if (isDesktop) {
-        sticky.classList.add('sm:translate-y-24');
+        sticky.classList.remove(
+          'sm:translate-y-0',
+          'sm:opacity-100'
+        );
+
+        sticky.classList.add(
+          'sm:translate-y-[150%]',
+          'sm:opacity-0'
+        );
       } else {
-        sticky.classList.add('translate-y-full');
+        sticky.classList.remove(
+          'translate-y-0',
+          'opacity-100'
+        );
+
+        sticky.classList.add(
+          'translate-y-[150%]',
+          'opacity-0'
+        );
       }
       
+      // Remover el listener de scroll para no consumir recursos.
       window.removeEventListener('scroll', handleScroll);
+
+      // Eliminar el componente completamente del DOM después de la animación (700ms).
+      setTimeout(() => {
+        sticky.remove();
+      }, 700);
     });
 
-    // Throttling básico para mejorar el rendimiento del evento scroll
+    // Throttling básico para mejorar el rendimiento del evento scroll.
     let ticking = false;
-    window.addEventListener('scroll', () => {
+
+    const requestScrollUpdate = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           handleScroll();
           ticking = false;
         });
+
         ticking = true;
       }
+    };
+
+    window.addEventListener('scroll', requestScrollUpdate, {
+      passive: true
+    });
+
+    // Volver a calcular cuando cambie el tamaño o la orientación de la pantalla.
+    window.addEventListener('resize', requestScrollUpdate, {
+      passive: true
     });
     
-    // Ejecutar una vez al cargar por si el usuario ya está a mitad de página
+    // Ejecutar una vez al cargar por si el usuario ya está a mitad de página.
     handleScroll();
   }
 
-  // Inicialización estándar y soporte para Astro View Transitions
+  // Inicialización estándar y soporte para Astro View Transitions.
   initConversionCTA();
   document.addEventListener('astro:after-swap', initConversionCTA);
 </script>

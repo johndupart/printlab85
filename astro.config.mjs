@@ -5,6 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://printlab85.com',
 
+  build: {
+    inlineStylesheets: 'always'
+  },
+
   vite: {
     plugins: [
       tailwindcss()

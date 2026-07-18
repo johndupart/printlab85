@@ -2,19 +2,19 @@
 // ZoomParallax.astro
 const images = [
     // Imagen 0 (Centro)
-    { src: '/images/taller_zipaquira_serigrafia.webp', class: 'h-[20vh] md:h-[30vh] z-10', position: 'translate(0, 0)' },
+    { src: '/images/taller_zipaquira_serigrafia.webp', width: 724, height: 483, class: 'h-[20vh] md:h-[30vh] z-10', position: 'translate(0, 0)' },
     // Imagen 1
-    { src: '/images/estanpados_camisietas.webp', class: 'h-[22vh] md:h-[28vh]', position: 'translate(5vw, -32vh)' },
+    { src: '/images/estanpados_camisietas.webp', width: 644, height: 965, class: 'h-[22vh] md:h-[28vh]', position: 'translate(5vw, -32vh)' },
     // Imagen 2
-    { src: '/images/foto_taller_serigrafia.webp', class: 'h-[18vh] md:h-[25vh]', position: 'translate(-24vw, -12vh)' },
+    { src: '/images/foto_taller_serigrafia.webp', width: 805, height: 1206, class: 'h-[18vh] md:h-[25vh]', position: 'translate(-24vw, -12vh)' },
     // Imagen 3
-    { src: '/images/serigrafia_zipaquira.webp', class: 'h-[20vh] md:h-[26vh]', position: 'translate(30vw, -20vh)' },
+    { src: '/images/serigrafia_zipaquira.webp', width: 805, height: 1206, class: 'h-[20vh] md:h-[26vh]', position: 'translate(30vw, -20vh)' },
     // Imagen 4
-    { src: '/images/taller_serigrafia_estampados.webp', class: 'h-[22vh] md:h-[26vh]', position: 'translate(2vw, 28vh)' },
+    { src: '/images/taller_serigrafia_estampados.webp', width: 805, height: 1206, class: 'h-[22vh] md:h-[26vh]', position: 'translate(2vw, 28vh)' },
     // Imagen 5
-    { src: '/images/taller_serigrafia_zipaquira.webp', class: 'h-[18vh] md:h-[20vh]', position: 'translate(-28vw, 28vh)' },
+    { src: '/images/taller_serigrafia_zipaquira.webp', width: 805, height: 1206, class: 'h-[18vh] md:h-[20vh]', position: 'translate(-28vw, 28vh)' },
     // Imagen 6
-    { src: '/images/estampado_bolsas_papel.webp', class: 'h-[10vh] md:h-[15vh]', position: 'translate(30vw, 22vh)' },
+    { src: '/images/estampado_bolsas_papel.webp', width: 805, height: 1206, class: 'h-[10vh] md:h-[15vh]', position: 'translate(30vw, 22vh)' },
 ];
 ---
 <section id="parallax-container" class="relative h-[300vh] bg-background-dark w-full py-40">
@@ -22,7 +22,7 @@ const images = [
         Galeria
     </h2>
     <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        
+
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
             <h2 class="text-[20vw] font-black text-white/[0.02] uppercase leading-none select-none italic tracking-tighter">
                 Printlab
@@ -31,16 +31,18 @@ const images = [
 
         <div class="relative w-full h-full flex items-center justify-center py-40">
             {images.map((img, i) => (
-                <div 
+                <div
                     data-parallax-item={i}
                     data-base-pos={img.position}
                     style={`transform: ${img.position}`}
                     class={`absolute flex items-center justify-center transition-opacity duration-500 cursor-zoom-in group w-auto ${img.class}`}
                 >
                     <div class="relative w-auto h-full overflow-hidden rounded-[10px] shadow-[0_0_30px_rgba(0,0,0,0.6)] group-[.is-touched]:border-primary/50 transition-all duration-500">
-                        <img 
-                            src={img.src} 
-                            alt="Printlab Gallery" 
+                        <img
+                            src={img.src}
+                            alt="Printlab Gallery"
+                            width={img.width}
+                            height={img.height}
                             class="gallery-img w-auto h-full object-cover transition-all duration-700 scale-110 group-hover:scale-100 group-[.is-touched]:scale-100 rounded-[10px]"
                             loading="lazy"
                         />
@@ -59,7 +61,7 @@ const images = [
     aria-label="Galería ampliada de proyectos de Printlab.85"
     class="bg-black/95 w-full h-full max-w-none max-h-none m-0 p-0 border-none backdrop:bg-black/95 backdrop:backdrop-blur-2xl outline-none overflow-hidden text-white">
     <div class="relative w-full h-full flex items-center justify-center p-4 md:p-12">
-        
+
         <button
             id="closeLightbox"
             type="button"
@@ -90,8 +92,15 @@ const images = [
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
 
-        <img id="lightboxImg" src="" alt="" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl transition-transform duration-300">
-        
+        <img
+            id="lightboxImg"
+            alt="Proyecto de Printlab.85 ampliado"
+            width="724"
+            height="483"
+            decoding="async"
+            class="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl transition-transform duration-300"
+        >
+
         <div id="imgCounter" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-black tracking-[0.4em] uppercase opacity-40">
             0 / 0
         </div>
@@ -106,21 +115,33 @@ const images = [
     const lightbox = document.getElementById('lightbox') as HTMLDialogElement;
     const lightboxImg = document.getElementById('lightboxImg') as HTMLImageElement;
     const counter = document.getElementById('imgCounter');
-    
+
     // Controles
     const closeBtn = document.getElementById('closeLightbox');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
     let currentIndex = 0;
-    const imagesList = Array.from(document.querySelectorAll('.gallery-img')).map((img: any) => img.src);
+    const imagesList = Array.from(
+        document.querySelectorAll<HTMLImageElement>('.gallery-img')
+    ).map((image) => ({
+        src: image.src,
+        width: Number(image.getAttribute('width')) || image.naturalWidth || 1,
+        height: Number(image.getAttribute('height')) || image.naturalHeight || 1
+    }));
 
     const updateLightbox = (index: number) => {
         currentIndex = index;
+
+        const selectedImage = imagesList[currentIndex];
+        if (!selectedImage) return;
+
         if (lightboxImg) {
+            lightboxImg.width = selectedImage.width;
+            lightboxImg.height = selectedImage.height;
             lightboxImg.style.opacity = '0';
             setTimeout(() => {
-                lightboxImg.src = imagesList[currentIndex];
+                lightboxImg.src = selectedImage.src;
                 lightboxImg.style.opacity = '1';
             }, 150);
         }
@@ -137,7 +158,7 @@ const images = [
                     const basePos = el.getAttribute('data-base-pos');
                     const targetScale = targetScales[i] || 4;
                     const currentScale = 1 + (targetScale - 1) * progress;
-                    
+
                     // Escalamos la foto
                     el.style.transform = `${basePos} scale(${currentScale})`;
                     el.style.opacity = progress > 0.85 ? `${1 - (progress - 0.85) * 6}` : "1";
@@ -176,7 +197,7 @@ const images = [
         });
 
         closeBtn?.addEventListener('click', () => { lightbox.close(); document.body.style.overflow = ''; });
-        
+
         lightbox?.addEventListener('click', (e) => {
             if (e.target === lightbox) { lightbox.close(); document.body.style.overflow = ''; }
         });

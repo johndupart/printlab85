@@ -5,28 +5,28 @@ const services = [
     desc: "Técnica artesanal con acabados duraderos para producciones a gran escala.",
     tag: "Calidad",
     class: "md:col-span-2 md:row-span-2 bg-brand-blue/10 border-brand-blue/20",
-    img: "/images/servicio_serigrafia.jpg"
+    img: "/images/servicio_serigrafia.webp"
   },
   {
     title: "Bolsas Kraft",
     desc: "Empaques eco-amigables con tu marca.",
     tag: "Eco",
     class: "md:col-span-2 md:row-span-1 glass-card",
-    img: "/images/servicio_bolsa_kraft.jpg"
+    img: "/images/servicio_bolsa_kraft.webp"
   },
   {
     title: "Diseño Gráfico",
     desc: "Adaptación profesional de tus ideas para una impresión perfecta.",
     tag: "Promo",
     class: "md:col-span-1 md:row-span-1 glass-card",
-    img: "/images/diseno-grafico-zipaquira.jpg"
+    img: "/images/diseno-grafico-zipaquira.webp"
   },
   {
     title: "Ropa Premium",
     desc: "Algodón de 180g con estampados de alta resistencia.",
     tag: "Textil",
     class: "md:col-span-1 md:row-span-1 glass-card",
-    img: "/images/servicio_tienda.jpg"
+    img: "/images/servicio_tienda.webp"
   },
   // INVERSIÓN: Dos pequeñas primero, luego la grande (Vinilo/Personalización)
   {
@@ -34,21 +34,21 @@ const services = [
     desc: "Full color con alta definición para diseños detallados y complejos.",
     tag: "Eco",
     class: "md:col-span-1 md:row-span-1 glass-card",
-    img: "/images/estampados-dtf-zipaquira.jpg"
+    img: "/images/estampados-dtf-zipaquira.webp"
   },
   {
     title: "Finalización",
     desc: "Preparación de artes y optimización técnica para el resultado final.",
     tag: "Promo",
     class: "md:col-span-1 md:row-span-1 glass-card",
-    img: "/images/finalizacion.jpg"
+    img: "/images/finalizacion.webp"
   },
   {
     title: "Vinilo Textil",
     desc: "Personalización con nombres, números y colores planos de larga vida.",
     tag: "Textil",
     class: "md:col-span-2 md:row-span-1 glass-card",
-    img: "/images/vinilo-textil-zipaquira.jpg"
+    img: "/images/vinilo-textil-zipaquira.webp"
   }
 ];
 ---
@@ -78,7 +78,16 @@ const services = [
         <div class={`service-card group relative rounded-[2.5rem] border p-8 overflow-hidden transition-all duration-700 hover:border-primary/60 glass-shine cursor-pointer touch-manipulation ${s.class}`}>
           
           <div class="absolute inset-0 z-0 opacity-10 group-hover:opacity-40 group-[.is-touched]:opacity-40 transition-all duration-700 scale-110 group-hover:scale-100 group-[.is-touched]:scale-100">
-            <img src={s.img} alt={s.title} class="h-full w-full object-cover grayscale group-hover:grayscale-0 group-[.is-touched]:grayscale-0" />
+            <img
+              src={s.img}
+              alt={s.title}
+              width="900"
+              height="700"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+              class="h-full w-full object-cover grayscale group-hover:grayscale-0 group-[.is-touched]:grayscale-0"
+            />
           </div>
 
           <div class="relative z-10 h-full flex flex-col justify-between">

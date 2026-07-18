@@ -4,24 +4,27 @@ const sections = [
     left: "Identidad",
     title: "SERIGRAFÍA",
     right: "Artesanal",
-    bg: "/images/serigrafia.jpg",
-    bgMobile: "/images/serigrafia_movil.jpg", // Tu versión 9:16
+    bg: "/images/serigrafia.webp",
+    bgMobile: "/images/serigrafia_movil.webp", // Tu versión 9:16
   },
   {
     left: "Calidad",
     title: "BOLSAS KRAFT",
     right: "Ecológico",
-    bg: "/images/bolsa_kraft.jpg",
-    bgMobile: "/images/bolsa_kraft_movil.jpg", // Tu versión 9:16
+    bg: "/images/bolsa_kraft.webp",
+    bgMobile: "/images/bolsa_kraft_movil.webp", // Tu versión 9:16
   },
   {
     left: "Estilo",
     title: "ROPA CASUAL",
     right: "Premium",
-    bg: "/images/tienda.jpg",
-    bgMobile: "/images/tienda_movil.jpg", // Tu versión 9:16
+    bg: "/images/tienda.webp",
+    bgMobile: "/images/tienda_movil.webp", // Tu versión 9:16
   },
 ];
+
+const transparentPixel =
+  "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 ---
 
 <section id="hero-container" class="relative bg-background-dark">
@@ -34,21 +37,30 @@ const sections = [
       {sections.map((s, i) => (
         <div 
           data-bg-index={i} 
-          class="absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out"
+          class={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            i === 0 ? "opacity-100" : "opacity-0"
+          }`}
         >
-          {/* Imagen para Escritorio (Oculta en móviles) */}
-          <img 
-            src={s.bg} 
-            alt="" 
-            class="hidden md:block h-full w-full object-cover brightness-[0.3]" 
-          />
-          
-          {/* Imagen para Móvil (Oculta en escritorio) */}
-          <img 
-            src={s.bgMobile} 
-            alt="" 
-            class="block md:hidden h-full w-full object-cover brightness-[0.3]" 
-          />
+          <picture class="block h-full w-full">
+            <source
+              media="(max-width: 767px)"
+              srcset={i === 0 ? s.bgMobile : undefined}
+              data-srcset={i === 0 ? undefined : s.bgMobile}
+              width="900"
+              height="1600"
+            />
+            <img
+              src={i === 0 ? s.bg : transparentPixel}
+              data-src={i === 0 ? undefined : s.bg}
+              alt=""
+              width="1920"
+              height="1080"
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+              fetchpriority={i === 0 ? "high" : "low"}
+              class="h-full w-full object-cover brightness-[0.3]"
+            />
+          </picture>
 
           <div class="absolute inset-0 bg-gradient-to-b from-background-dark/30 via-transparent to-background-dark"></div>
         </div>
@@ -77,7 +89,11 @@ const sections = [
             {sections.map((s, i) => (
                 <p
                     data-title-index={i} 
-                    class="absolute text-[clamp(2.5rem,12vw,9rem)] font-black leading-none opacity-0 translate-y-12 transition-all duration-1000 ease-out text-white tracking-tighter"
+                    class={`absolute text-[clamp(2.5rem,12vw,9rem)] font-black leading-none transition-all duration-1000 ease-out text-white tracking-tighter ${
+                      i === 0
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-12"
+                    }`}
                 >
                     {s.title}
                 </p>
@@ -119,12 +135,46 @@ const sections = [
   
   const totalSections = bgs.length;
 
+  const loadBackground = (index: number) => {
+    const background = bgs[index] as HTMLElement | undefined;
+    if (!background) return;
+
+    const source = background.querySelector(
+      "source[data-srcset]"
+    ) as HTMLSourceElement | null;
+
+    const image = background.querySelector(
+      "img[data-src]"
+    ) as HTMLImageElement | null;
+
+    const nextSource = source?.dataset.srcset;
+    const nextImage = image?.dataset.src;
+
+    if (source && nextSource) {
+      source.srcset = nextSource;
+      delete source.dataset.srcset;
+    }
+
+    if (image && nextImage) {
+      image.src = nextImage;
+      delete image.dataset.src;
+    }
+  };
+
   if (container) {
     scroll((progress: number) => {
       const activeIndex = Math.min(
-          totalSections - 1, 
+          totalSections - 1,
           Math.floor(progress * totalSections)
       );
+
+      const preloadIndex = Math.min(
+          totalSections - 1,
+          Math.floor((progress + 0.15) * totalSections)
+      );
+
+      loadBackground(activeIndex);
+      loadBackground(preloadIndex);
 
       if (progressBar) {
           progressBar.style.width = `${progress * 100}%`;

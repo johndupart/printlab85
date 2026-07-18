@@ -1,12 +1,12 @@
 ---
 const brands = [
-  { name: "PIZZAQUIRA", src: "/images/logos/pizzaquira.png" },
-  { name: "ape", src: "/images/logos/ape.png" },
-  { name: "chivato", src: "/images/logos/chivato.png" },
-  { name: "eltopping", src: "/images/logos/eltopping.png" },
-  { name: "Conecta", src: "/images/logos/conecta.png" },
-  { name: "vita", src: "/images/logos/vita.png" },
-  { name: "zipaquiradigital", src: "/images/logos/zipaquiradigital.png" }
+  { name: "PIZZAQUIRA", src: "/images/logos/pizzaquira.webp" },
+  { name: "ape", src: "/images/logos/ape.webp" },
+  { name: "chivato", src: "/images/logos/chivato.webp" },
+  { name: "eltopping", src: "/images/logos/eltopping.webp" },
+  { name: "Conecta", src: "/images/logos/conecta.webp" },
+  { name: "vita", src: "/images/logos/vita.webp" },
+  { name: "zipaquiradigital", src: "/images/logos/zipaquiradigital.webp" }
 ];
 ---
 
@@ -29,11 +29,16 @@ const brands = [
         <div class="flex animate-marquee-pro whitespace-nowrap gap-12 md:gap-24 items-center">
           {[...brands, ...brands].map((brand) => (
             <div class="flex items-center gap-6 md:gap-20 group/item">
-             <img 
-  src={brand.src} 
-  alt={brand.name} 
-  class="h-12 md:h-16 w-auto max-w-[140px] md:max-w-[180px] object-contain opacity-80  hover:opacity-100 hover:grayscale-0 transition-all duration-500 hover:scale-105 select-none"
-/>
+              <img
+                src={brand.src}
+                alt={brand.name}
+                width="300"
+                height="122"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                class="h-12 md:h-16 w-auto max-w-[140px] md:max-w-[180px] object-contain opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-500 hover:scale-105 select-none"
+              />
               <span class="text-primary/30 font-light text-2xl md:text-3xl">/</span>
             </div>
           ))}
